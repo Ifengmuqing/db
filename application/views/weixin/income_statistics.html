@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/income_statistics.css');?>">
+    <title>业绩统计总览</title>
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item ">
+               
+            </div>
+            <div id="tab2" class="weui-tab__bd-item ">                   
+                
+            </div>
+            <div id="tab4" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="statisc_title">
+                    <span>
+                            选择年度：<select name="" id="year_select">
+                                    <?php foreach ($year as $item): ?>
+                                        <option value="<?php echo $item ;?>"><?php echo $item ;?></option>
+                                     <?php endforeach; ?>
+                                  </select>
+                            
+                                  <i style="font-size:12px;font-style:normal">(单位:万元)</i>
+                    </span>
+                    
+                </div>
+                <div id="main" style="width:100%;height:400px;"></div>
+                <div class="total">
+                   <div class="totla_inner">
+                       <span style="color:#000">年度合计：</span> <span style="color:#5a9fa6">广告费为<em id="adTotal"><?php echo $adTotal;?></em>,</span><span style="color:#c73535" >总收入为<em id="monthTotal"><?php echo $monthTotal;?></em>。</span>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <?php
+         $this->load->view('weixin/tabbar');
+        ;?>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+<script src="<?php echo base_url('static/js/echarts.common.min.js');?>"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    // var adArr=[<?php echo ($adcost[0]['Jan']/10000).','.($adcost[0]['Feb']/10000).','.($adcost[0]['Mar']/10000).','.($adcost[0]['Apr']/10000).','.($adcost[0]['May']/10000).','.($adcost[0]['Jun']/10000).','.($adcost[0]['Jul']/10000).','.($adcost[0]['Aug']/10000).','.($adcost[0]['Sept']/10000).','.($adcost[0]['Oct']/10000).','.($adcost[0]['Nov']/10000).','.($adcost[0]['Dec']/10000)  ;?>];
+    // var incomeArr=[<?php echo $monthArray[0].','.$monthArray[1].','.$monthArray[2].','.$monthArray[3].','.$monthArray[4].','.$monthArray[5].','.$monthArray[6].','.$monthArray[7].','.$monthArray[8].','.$monthArray[9].','.$monthArray[10].','.$monthArray[11] ;?>];
+    var adArr=[<?php echo ($adcost[0]['Dec']/10000).','.($adcost[0]['Nov']/10000).','.($adcost[0]['Oct']/10000).','.($adcost[0]['Sept']/10000).','.($adcost[0]['Aug']/10000).','.($adcost[0]['Jul']/10000).','.($adcost[0]['Jun']/10000).','.($adcost[0]['May']/10000).','.($adcost[0]['Apr']/10000).','.($adcost[0]['Mar']/10000).','.($adcost[0]['Feb']/10000).','.($adcost[0]['Jan']/10000)  ;?>];
+    var incomeArr=[<?php echo $monthArray[11].','.$monthArray[10].','.$monthArray[9].','.$monthArray[8].','.$monthArray[7].','.$monthArray[6].','.$monthArray[5].','.$monthArray[4].','.$monthArray[3].','.$monthArray[2].','.$monthArray[1].','.$monthArray[0] ;?>];
+    console.log(incomeArr);
+    console.log(adArr);
+    option = {
+        title: {
+        },
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            },
+            // formatter: '{a0}:{c0}万<br/>{a1}:{c1}万'
+        },
+        legend: {
+            data: ["广告","收入"]
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            data: ['10','20','30','40','50','60']
+        },
+        yAxis: {
+            type: 'category',
+            data: ['十二月','十一月','十月','九月','八月','七月','六月','五月','四月','三月','二月','一月']
+        },
+        series: [
+        
+            {
+                name: '广告',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        show: true,
+                        color: '#5a9fa6'
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        // formatter: '{c}万'
+                    }
+                },
+                // data: [3,3,3,3,3,3,3,3,3,3,3,3]
+                data: adArr 
+            },
+            {
+                name: '收入',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        show: true,
+                        color: '#c73535'
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight',
+                        // formatter: '{c}万'
+                    }
+                },
+                // data: [30,30,30,30,30,30,30,50,30,30,30,30,]
+                data: incomeArr 
+            },
+            
+        ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    // 年份选择
+    
+        $('#year_select').change(function () {
+            var year = $('#year_select option:selected').val();
+            $.ajax({
+                url: '<?php echo site_url("admin/getStatistics");?>',
+                type: 'post', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                    'year':year
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                    console.log(data['adTotal']);
+                    var option = {
+                        title: {
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                            },
+                            // formatter: '{a0}:{c0}万<br/>{a1}:{c1}万'
+                        },
+                        legend: {
+                            data: ["广告", "收入"]
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value',
+                            data: ['10', '20', '30', '40', '50', '60']
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: ['十二月', '十一月', '十月', '九月', '八月', '七月', '六月', '五月', '四月', '三月', '二月', '一月']
+                        },
+                        series: [
+
+                            {
+                                name: '广告',
+                                type: 'bar',
+                                stack: '总量',
+                                itemStyle: {
+                                    normal: {
+                                        show: true,
+                                        color: '#5a9fa6'
+                                    }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'insideRight',
+                                        // formatter: '{c}万'
+                                    }
+                                },
+                                // data: [3,3,3,3,3,3,3,3,3,3,3,3]
+                                data:data['adArray']
+                            },
+                            {
+                                name: '收入',
+                                type: 'bar',
+                                stack: '总量',
+                                itemStyle: {
+                                    normal: {
+                                        show: true,
+                                        color: '#c73535'
+                                    }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'insideRight',
+                                        // formatter: '{c}万'
+                                    }
+                                },
+                                // data: [30,30,30,30,30,30,30,50,30,30,30,30,]
+                                data:data['monthArray']
+                            },
+
+                        ]
+                    };
+                    $("#adTotal").text(data['adTotal']);
+                    $("#monthTotal").text(data['monthTotal']);
+                    myChart.setOption(option);
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        });
+</script>
+</html>

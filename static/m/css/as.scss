@@ -1,0 +1,72 @@
+@charset "utf-8";
+@import 'reset.css';
+a{
+    text-decoration: none;
+}
+$w:75;
+@function rem($n) {
+    @return ($n/$w) + rem;
+}
+@mixin font-dpr($font-size) {
+    font-size: $font-size;
+    [data-dpr="2"] & {
+        font-size: $font-size * 2;
+    }
+    [data-dpr="3"] & {
+        font-size: $font-size * 3;
+    }
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    padding-top: 5.933333rem;
+    overflow: hidden;
+    background: url(../images/loansuccess.png) center no-repeat;
+    background-size: rem(518) rem(389);
+    background-position: center 30px;
+    text-align: center;
+    @include font-dpr(15px);
+    p{
+        width:80%;
+        width: 80%;
+        margin: 0 auto;
+        text-align: left;
+        text-indent: 2em;
+        margin-top:20px;
+    }
+}
+.qr_code{
+    text-align: center;
+}
+.daibei_app{
+    @include font-dpr(15px);
+    margin: 0.666666667rem 1.0666666667rem;
+    p{
+        text-align: center;
+    }   
+}
+.a-btn{
+    display:block;
+    margin:0 auto;
+    width:rem(590);
+    height: rem(90);
+    line-height: rem(90);
+    text-align: center;
+    background: #53aef3;
+    color:#fff;
+    border-radius:rem(4);
+    margin-top: rem(9);
+    outline: 0;
+    border:0;
+}
+.ad{
+    text-align: center;
+    img{
+        width:rem(750);
+        height: rem(190);
+    }
+}

@@ -1,0 +1,3 @@
+RewriteEngine on  
+RewriteCond $1 !^(index\.php|static|uploads|robots\.txt|MP_verify_cNCv2o7Wu8lwxwZI.txt|test.php|phpMyAdmin)  
+RewriteRule ^(.*)$ /daibei/index.php?/$1[L]

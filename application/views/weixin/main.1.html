@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/add.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <title></title>
+</head>
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item ">
+                <!-- <div class="add_page">
+                        <form action="<?php echo site_url('Admin/HandleAdd'); ?>" id="add_recond" method="post">
+                            <div class="weui-cells weui-cells_form">
+                                <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">姓名</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="请输入用户姓名" name="name">
+                                    </div>
+                                </div>
+                                <div class="weui-cell  add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">手机</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="请输入手机号" name="phone">
+                                    </div>
+                                </div>
+                                <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label for="" class="weui-label">时间</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" value="" placeholder="请选择时间" name="applyTime" id="add_page_time" readonly>
+                                    </div>
+                                </div>
+                                <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">贷款产品</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="请输入产品名称" name="productName">
+                                    </div>
+                                </div>
+
+                                <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">额度(元)</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="请输入额度" name="need">
+                                    </div>
+                                </div>
+                                <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd ">
+                                        <label class="weui-label">利率(%)</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="请输入产品利率" name="rate">
+                                    </div>
+                                </div>
+
+                                <div class="weui-cell cost add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">费用</label>
+                                    </div>
+                                    <div class="weui-cell weui-cell_select weui-cell__hd">
+                                        <div class="weui-cell__bd">
+                                            <select class="weui-select" name="select1" id="costType">
+                                                <option selected="" value="1">百分比</option>
+                                                <option value="2">实际额</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell__cost">
+                                        <div class="">
+                                            <div class="c_percent checktip c_active">
+                                                <input class="weui-input" type="text" placeholder="" name="percent"> %
+                                            </div>
+                                            <div class="c_fact checktip" style="display:none">
+                                                <input class="weui-input" type="text" placeholder="" name="fact"> 元
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="weui-cells__title">备注</div>
+                                <div class="weui-cells">
+                                    <div class="weui-cell">
+                                        <div class="weui-cell__bd">
+                                            <textarea class="weui-textarea" placeholder="请输入备注" rows="3" name="remark"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="weui-btn-area">
+                                    <a class="weui-btn weui-btn_primary" href="javascript:void(0)" id="add-submit">保存</a>
+                                </div>
+                            </div>
+                            <?php csrf_hidden();?>
+                        </form>
+
+                    </div> -->
+                <div class="item-box weui-pull-to-refresh">
+                    <div class="weui-pull-to-refresh__layer">
+                        <div class="weui-pull-to-refresh__arrow"></div>
+                        <div class="weui-pull-to-refresh__preloader"></div>
+                        <div class="down">下拉刷新</div>
+                        <div class="up">释放刷新</div>
+                        <div class="refresh">正在刷新</div>
+                    </div>
+                    <div class="customers-loading-wrap" style="display:block">
+                        <div class="weui-loadmore">
+                            <i class="weui-loading"></i>
+                            <span class="weui-loadmore__tips">正在加载</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore_line">
+                            <span class="weui-loadmore__tips">暂无数据</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                            <span class="weui-loadmore__tips"></span>
+                        </div>
+                    </div>
+                    <div class="customers_page" style="display:none">
+                        <div class="weui-flex weixin_page_title">
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-shijian5"></i>
+                            </div>
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-yonghurenxiang"></i>
+                            </div>
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-dizhi"></i>
+                            </div>
+                            <div class="weui-flex__item">
+                                <i class="iconfont  icon-dianhua"></i>
+                            </div>
+                        </div>
+                        <div class="customers_page_item">
+                            <!-- <div class="weui-cell weui-cell_swiped swipe_item">
+                                    <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
+                                        <div class="weui-cell item">
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 2017-12-12</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner">红红火火</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 广州</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 18316492757</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell__ft">
+                                        <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
+                                    </div>
+                                </div>
+                                <div class="weui-cell weui-cell_swiped swipe_item">
+                                    <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
+                                        <div class="weui-cell item">
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 2017-12-12</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner">红红火火</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 广州</div>
+                                            </div>
+                                            <div class="weui-flex__item">
+                                                <div class="item_inner"> 18316492757</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="weui-cell__ft">
+                                        <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout delete_item" href="javascript:">删除</a>
+                                    </div>
+                                </div> -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="client_page">
+                     <div class="client_header">
+                            <div class="client_tab">
+                                <div class="tab_item">
+                                    <i class="iconfont icon-moshengren"></i>
+                                    <p>陌生客户</p>
+                                </div>
+                                <div class="tab_item">
+                                   <i class="iconfont icon-hezuo"></i>
+                                    <p>签约客户</p>
+                                </div>
+                                <div class="tab_item">
+                                    <i class="iconfont icon-xinzeng"></i>
+                                    <p>新增客户</p>
+                                </div>
+                            </div>
+                     </div>
+                     <div class="tab_contents">
+                         <div class="tab_content">
+                               
+                         </div>
+                         <div class="tab_content">
+                             
+                        </div>
+                        <div class="tab_content">
+                             
+                        </div>
+                     </div>            
+                </div>
+            </div>
+            <div id="tab4" class="weui-tab__bd-item">
+                <div class="item-box weui-pull-to-refresh">
+                    <div class="weui-pull-to-refresh__layer">
+                        <div class="weui-pull-to-refresh__arrow"></div>
+                        <div class="weui-pull-to-refresh__preloader"></div>
+                        <div class="down">下拉刷新</div>
+                        <div class="up">释放刷新</div>
+                        <div class="refresh">正在刷新</div>
+                    </div>
+                    <div class="loading-wrap">
+                        <div class="weui-loadmore">
+                            <i class="weui-loading"></i>
+                            <span class="weui-loadmore__tips">正在加载</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore_line">
+                            <span class="weui-loadmore__tips">暂无数据</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                            <span class="weui-loadmore__tips"></span>
+                        </div>
+                    </div>
+                    <div class="show_page" style="display:none">
+                        <div class="weui-flex show_page_title">
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-shijian5"></i>
+                            </div>
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-yonghurenxiang"></i>
+                            </div>
+                            <div class="weui-flex__item">
+                                <i class="iconfont  icon-dianhua"></i>
+                            </div>
+                        </div>
+                        <div class="show_page_item">
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-tabbar">
+            <a href="#tab1" class="weui-tabbar__item weui-bar__item--on" id="get_apply_list">
+                <div class="weui-tabbar__icon">
+                    <img src="<?php echo base_url('static/m/images/icon_nav_button.png');?>" alt="">
+                </div>
+                <p class="weui-tabbar__label">陌生客户</p>
+            </a>
+            <a href="#tab2" class="weui-tabbar__item" id="get_follow">
+                <div class="weui-tabbar__icon">
+                    <img src="<?php echo base_url('static/m/images/icon_nav_msg.png');?>" alt="">
+                </div>
+                <p class="weui-tabbar__label">客户管理</p>
+            </a>
+            <a href="#tab4" class="weui-tabbar__item " id="get_list">
+                <div class="weui-tabbar__icon">
+                    <img src="<?php echo base_url('static/m/images/icon_nav_cell.png');?>" alt="">
+                </div>
+                <p class="weui-tabbar__label">查询</p>
+            </a>
+        </div>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/localization/messages_zh.min.js"></script> -->
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="<?php echo base_url('static/m/js/add.js');?>"></script>
+<script>
+    $(function () { 
+        // 初始化滑动删除
+        $('.weui-cell_swiped').swipeout();
+        //自定义手机号验证
+        jQuery.validator.addMethod("isphoneNum", function (value, element) {
+            var length = value.length;
+            var mobile = /^1[3|5|8]{1}[0-9]{9}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+        $("#add_recond").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: {
+                    required: true,
+                    maxlength: 11,
+                    maxlength: 11,
+                    isphoneNum: true
+                },
+                time: "required",
+                productName: {
+                    required: true,
+                    minlength: 2
+                },
+                need: {
+                    required: true,
+                    number: true,
+                },
+                rate: {
+                    required: true,
+                    number: true,
+                },
+                percent: {
+                    required: function () {
+                        return $('.c_percent').hasClass('c_active');
+                    },
+                    number: true,
+
+                },
+                fact: {
+                    required: function () {
+                        return $('.c_fact').hasClass('c_active');
+                    },
+                    number: true,
+                }
+
+            },
+            messages: {
+                name: {
+                    required: "*请输入用户名",
+                    minlength: "用户名必需由两个字母组成"
+                },
+                phone: {
+                    required: "*请输入手机号",
+                    maxlength: "*请填写11位的手机号",
+                    minlength: "*请填写11位的手机号",
+                    isphoneNum: "请填写正确的手机号码"
+                },
+                time: {
+                    required: "*请选择时间",
+                },
+                productName: {
+                    required: "*请输入产品名称",
+                    minlength: "产品名称必需由两个字母组成"
+                },
+                need: {
+                    required: "*请输入贷款额度",
+                    number: "请输入正确的数字"
+                },
+                rate: {
+                    required: "*请输入贷款额度",
+                    number: "请输入正确的数字"
+                },
+                percent: {
+                    required: "*请输入费用百分比",
+                    number: "请输入正确的数字"
+                },
+                fact: {
+                    required: "*请输入费用实际额",
+                    number: "请输入正确的数字"
+                },
+            }
+        });
+        // 
+        $('#get_list').one("click", function () {
+            $.ajax({
+                url: '<?php echo site_url("Admin/getApplyList");?>',
+                type: 'get', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    var applyList = data;
+                    var alString = '';
+                    for (var i = 0, len = applyList.length; i < len; i++) {
+                        alString +=
+                            "<a href=\"<?php echo site_url('Admin/modify');?>" +
+                            "?id=" + applyList[i]['id'] +
+                            "\" class=\"weui-flex item\"><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                            applyList[i]['applyTime'] +
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                            applyList[i]['name'] +
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                            applyList[i]['phone'] +
+                            "</div></div></a>"
+                    }
+                    localStorage["applylist"] = JSON.stringify(data);
+                    // localStorage.setItem("applylist", data); //设置键的值 
+                    $('.loading-wrap').hide();
+                    $('.show_page').show();
+                    $('.show_page_item').append(alString);
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        });
+        function hanldeUndefined(a){
+            if(a==undefined){
+                return '';
+            }else{
+                a
+            }
+        }
+        //客户 申请列表
+        $.ajax({
+            url: '<?php echo site_url("Admin/getCustomers");?>',
+            type: 'get', //GET
+            async: true, //或false,是否异步
+            cache: true,
+            data: {
+                // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+            },
+            timeout: 5000, //超时时间
+            dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+            beforeSend: function (xhr) {
+
+            },
+            success: function (data, textStatus, jqXHR) {
+                var customers = data;
+                var alString = '';
+                for (var i = 0, len = customers.length; i < len; i++) {
+                    alString +=
+                        "<div class=\"weui-cell weui-cell_swiped swipe_item\" data-userid=\"" +
+                            customers[i]['id'] +
+                            " \"><div class=\"weui-cell__bd\" style=\"transform: translate3d(0px, 0px, 0px);\"><div class=\"weui-cell item\"><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                        customers[i]['applyTime']+
+                        "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                            hanldeUndefined(customers[i]['Name']) +
+                        "</div> </div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                            hanldeUndefined(customers[i]['cName']) +
+                        "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                        customers[i]['applyPhoneNum'] +
+                        "</div></div></div></div><div class=\"weui-cell__ft\"><a class=\"weui-swiped-btn weui-swiped-btn_warn delete-swipeout delete_item\" href=\"javascript:\">删除</a></div></div>"
+                }
+                localStorage["customers"] = JSON.stringify(data);
+                localStorage.setItem("customers", data); //设置键的值 
+                $('.customers-loading-wrap').hide();
+                $('.customers_page').show();
+                $('.customers_page_item').append(alString);
+                // 初始化滑动删除
+               $('.weui-cell_swiped').swipeout();
+            },
+            error: function (xhr, textStatus) {
+
+            },
+            complete: function () {
+
+            }
+        });
+        // 客户申请操作
+        $('.customers_page').on('click', '.delete_item', function (e) {
+            alert(1);
+            var $this = $(this);
+            var userid = $this.closest('.list-item').get(0).getAttribute("data-userid");
+            $.ajax({
+                url: '<?php echo site_url("Apply/deleteItem");?>',
+                type: 'POST', //GET
+                async: true, //或false,是否异步
+                data: { uid: userid },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success === "ok") {
+                        alert("删除成功");
+                        $this.closest('.list-item').hide("100");
+                    }
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+
+                }
+            });
+            e.preventDefault();
+        });
+        // 新关注
+        $('#get_follow').one("click", function () {
+            $.ajax({
+                url: '<?php echo site_url("Admin/getFlowList");?>',
+                type: 'get', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    var followList = data;
+                    var alString = '';
+                    for (var i = 0, len = followList.length; i < len; i++) {
+                        alString +=
+                            "<a href=\"<?php echo site_url('Admin/add');?>" +
+                            "?username=" + followList[i]['username'] + '&phone=' +
+                            followList[i]['phone'] + '&identity=' + followList[i][
+                                'identity'
+                            ] +
+                            "\" class=\"weui-flex item\"><div class=\"weui-flex__item\"> <div class=\"item_inner\">" +
+                            followList[i]['time'] +
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                            followList[i]['username'] +
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                            followList[i]['phone'] +
+                            "</div></div></a>"
+                    }
+                    localStorage["followList"] = JSON.stringify(data);
+                    // localStorage.setItem("applylist", data); //设置键的值 
+                    $('.del_loading-wrap').hide();
+                    $('.delete_page').show();
+                    $('.delete_page_item').append(alString);
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+        });
+        // 滑动刷新
+        $("#tab4 .item-box").pullToRefresh().on("pull-to-refresh", function () {
+            $.ajax({
+                url: '<?php echo site_url("Admin/getApplyList");?>',
+                type: 'get', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (localStorage.getItem("applylist") !== JSON.stringify(data)) {
+                        var applyList = data;
+                        var alString = '';
+                        for (var i = 0, len = applyList.length; i < len; i++) {
+                            "<a href=\"<?php echo site_url('Admin/modify');?>" +
+                            "?id=" + applyList[i]['id'] +
+                                "\" class=\"weui-flex item\"><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                                applyList[i]['applyTime'] +
+                                "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                                applyList[i]['name'] +
+                                "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                                applyList[i]['phone'] +
+                                "</div></div></a>"
+                        }
+                        $(".show_page_item").empty().append(alString);
+                    }
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+
+            $("#tab4 .item-box").pullToRefreshDone();
+        });
+        $("#tab2 .item-box").pullToRefresh().on("pull-to-refresh", function () {
+            $.ajax({
+                url: '<?php echo site_url("Admin/getFlowList");?>',
+                type: 'get', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (localStorage.getItem("followList") !== JSON.stringify(data)) {
+                        var followList = data;
+                        var alString = '';
+                        for (var i = 0, len = followList.length; i < len; i++) {
+                            alString +=
+                                "<a href=\"<?php echo site_url('Admin/add');?>" +
+                                "?username=" + followList[i]['username'] + '&phone=' +
+                                followList[i]['phone'] + '&identity=' + followList[i][
+                                    'identity'
+                                ] +
+                                "\" class=\"weui-flex item\"><div class=\"weui-flex__item\"> <div class=\"item_inner\">" +
+                                followList[i]['time'] +
+                                "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                                followList[i]['username'] +
+                                "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                                followList[i]['phone'] +
+                                "</div></div></a>"
+                        }
+                        $(".delete_page_item").empty().append(alString);
+                    }
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+
+            $("#tab2 .item-box").pullToRefreshDone();
+        });
+        $("#tab1 .item-box").pullToRefresh().on("pull-to-refresh", function () {
+            $.ajax({
+                url: '<?php echo site_url("Admin/getCustomers");?>',
+                type: 'POST', //GET
+                async: true, //或false,是否异步
+                cache: true,
+                data: {
+                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (localStorage.getItem("followList") !== JSON.stringify(data)) {
+                        var customers = data;
+                        var alString = '';
+                        for (var i = 0, len = customers.length; i < len; i++) {
+                            alString +=
+                            "<div class=\"weui-cell weui-cell_swiped swipe_item\" data-userid=\"" +
+                            customers[i]['id'] +
+                            " \"><div class=\"weui-cell__bd\" style=\"transform: translate3d(0px, 0px, 0px);\"><div class=\"weui-cell item\"><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                            customers[i]['applyTime']+
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\">" +
+                                hanldeUndefined(customers[i]['Name']) +
+                            "</div> </div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                                hanldeUndefined(customers[i]['cName']) +
+                            "</div></div><div class=\"weui-flex__item\"><div class=\"item_inner\"> " +
+                            customers[i]['applyPhoneNum'] +
+                            "</div></div></div></div><div class=\"weui-cell__ft\"><a class=\"weui-swiped-btn weui-swiped-btn_warn delete-swipeout delete_item\" href=\"javascript:\">删除</a></div></div>"
+                        }
+                        $(".customers_page_item").empty().append(alString);
+                    }
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+
+                }
+            });
+
+            $("#tab1 .item-box").pullToRefreshDone();
+        });
+    });
+</script>
+
+</html>

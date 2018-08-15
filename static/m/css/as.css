@@ -1,0 +1,62 @@
+@import url(reset.css);
+a {
+  text-decoration: none; }
+
+body {
+  width: 100%;
+  height: 100%; }
+
+.header {
+  padding-top: 5.933333rem;
+  overflow: hidden;
+  background: url(../images/loansuccess.png) center no-repeat;
+  background-size: 6.9066666667rem 5.1866666667rem;
+  background-position: center 30px;
+  text-align: center;
+  font-size: 15px; }
+  [data-dpr="2"] .header {
+    font-size: 30px; }
+  [data-dpr="3"] .header {
+    font-size: 45px; }
+  .header p {
+    width: 80%;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    text-indent: 2em;
+    margin-top: 20px; }
+
+.qr_code {
+  text-align: center; }
+
+.daibei_app {
+  font-size: 15px;
+  margin: 0.666666667rem 1.0666666667rem; }
+  [data-dpr="2"] .daibei_app {
+    font-size: 30px; }
+  [data-dpr="3"] .daibei_app {
+    font-size: 45px; }
+  .daibei_app p {
+    text-align: center; }
+
+.a-btn {
+  display: block;
+  margin: 0 auto;
+  width: 7.8666666667rem;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  text-align: center;
+  background: #53aef3;
+  color: #fff;
+  border-radius: 0.0533333333rem;
+  margin-top: 0.12rem;
+  outline: 0;
+  border: 0; }
+
+.ad {
+  text-align: center; }
+  .ad img {
+    width: 10rem;
+    height: 2.5333333333rem; }
+
+/*# sourceMappingURL=as.css.map */

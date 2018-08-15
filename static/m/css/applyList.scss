@@ -1,0 +1,114 @@
+@charset "utf-8";
+@import 'reset.css';
+a {
+    text-decoration: none;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    /*超链接无下划线*/
+    color:rgb(0, 0, 238);
+}
+
+a:hover {
+    text-decoration: none;
+    /*鼠标放上去有下划线*/
+    color:rgb(0, 0, 238);
+}
+
+$w:75;
+@function rem($n) {
+    @return ($n/$w)+rem;
+}
+
+@mixin font-dpr($font-size) {
+    font-size: $font-size;
+    // [data-dpr="2"] & {
+    //     font-size: $font-size * 2;
+    // }
+    // [data-dpr="3"] & {
+    //     font-size: $font-size * 3;
+    // }
+}
+
+.head {
+    display: flex;
+    span {
+        flex: 1;
+        text-align: center;
+        height: rem(100);
+        line-height: rem(100);
+        background: #5957a2;
+        @include font-dpr(15px);
+        color: #fff;
+        font-weight: bold;
+        border-right: 1px solid #ccc;
+        &:last-child {
+            border: 0;
+        }
+        i {
+            display: inline-block;
+            font-size: rem(42);
+            height: rem(100);
+            line-height: rem(100);
+        }
+    }
+}
+
+.apply-list {
+    width: 100%;
+    overflow: hidden;
+    li.list-item {
+        display: flex;
+        transition: all 0.25s;
+        border-bottom: 1px solid #c4c4c4;
+        &>span {
+            flex: 1;
+            text-align: center;
+            height: rem(100);
+            line-height: rem(100);
+            @include font-dpr(13px);
+            border-right: 1px solid #ccc;
+            &:last-child {
+                border: 0;
+            }
+        }
+    }
+    a {
+        text-decoration: none;
+    }
+    
+    a:link,
+    a:visited {
+        text-decoration: none;
+    }
+}
+
+.swipe-action {
+    position: relative;
+    left: 0;
+}
+
+.swipe-content {
+    position: absolute;
+    width: 25%;
+    display: flex;
+    top: 0;
+    right: -25%;
+    height: rem(100);
+    line-height: rem(100);
+    background: #ccc;
+    .delete-item {
+        position: relative;
+        z-index: 999;
+        width: 100%;
+        text-align: center;
+        height: rem(100);
+        line-height: rem(100);
+        @include font-dpr(13px);
+        width: rem(25%);
+        background: #ff3a32;
+        color: #fff;
+    }
+}

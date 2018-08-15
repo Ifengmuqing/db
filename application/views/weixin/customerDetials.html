@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/customerDetials.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <title><?php echo $userinfo['name'] ?></title>
+</head>
+
+<body>
+    <div class="weui-tab" style="">
+        <div class="weui-tab__bd">
+            <div id="tab4" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="add_page customer_page">
+                    <div class="show_page" style="">
+                        <div class="weui-flex add_page_title">
+                            <div class="weui-flex__item">
+                                <i class="iconfont icon-geren"></i>客户详情
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page_customer">
+                        <div class="costomer_item">
+                            <div class="item_content" style="display:none">
+                                <div class="item_content_label">
+                                    uid：
+                                </div>
+                                <div class="item_content_text" id="uid">
+                                    <?php echo $userinfo['uid']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="date" style="position:relative">
+                                <input type="text" style="position:absolute;left:0;right:0;width:100%;height:100%;opacity:0" value="<?php echo $userinfo['date']; ?>">
+                                <div class="item_content_label">
+                                    日期：
+                                </div>
+                                <div class="item_content_text">
+                                    <?php echo $userinfo['date']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="username">    
+                                <div class="item_content_label">
+                                    姓名：
+                                </div>
+                                <div class="item_content_text" >
+                                <?php echo $userinfo['name']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="phone">
+                                <div class="item_content_label">手机：</div>
+                                <div class="item_content_text">
+                                    <?php echo $userinfo['phone']; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="costomer_item identity_item" >
+                            <div class="item_content" id="identity">
+                                <div class="item_content_label">
+                                    身份证号：
+                                </div>
+                                <div class="item_content_text">
+                                    <?php echo $userinfo['identity']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="sex">
+                                <div class="item_content_label">
+                                    性别：
+                                </div>
+                                <div class="item_content_text" id="chooseSex">
+                                    <?php
+                                        if($userinfo['sex'] == 1) {
+                                            echo "男";
+                                        } else if($userinfo['sex']==null){
+                                            echo "";
+                                        }else if($userinfo['sex'] == 0){
+                                            echo "女";
+                                        };?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="costomer_item">
+                            <div class="item_content" id="source">
+                                <div class="item_content_label">
+                                    客户来源：
+                                </div>
+                                <div class="item_content_text">
+                                <?php echo $userinfo['source']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="profession">
+                                <div class="item_content_label">
+                                    职业：
+                                </div>
+                                <div class="item_content_text">
+
+                                    <?php echo $userinfo['profession']; ?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="salary">
+                                <div class="item_content_label">
+                                    工资：
+                                </div>
+                                <div class="item_content_text">
+                                <?php echo $userinfo['salary']; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="costomer_item">
+                            <div class="item_content" id="requirement">
+                                <div class="item_content_label">
+                                    需求(万)：
+                                </div>
+                                <div class="item_content_text">
+                                <?php echo $userinfo['requirement']; ?>
+                                </div>
+                            </div>
+                            <?php 
+                            if($userinfo['costType']==0){
+                                print"<div class=\"item_content fyType ispercent\" id=\"feiyong\">
+                                   <div class=\"item_content_label\">
+                                       费用类型：
+                                        </div>
+                                        <div class=\"item_content_text\">
+                                            百分比
+                                        </div>
+                                    </div>
+                                    <div class=\"item_content fy\">
+                                        <div class=\"item_content_label\" >
+                                            费率：
+                                        </div>
+                                        <div class=\"item_content_text\" >
+                                                <span>{$userinfo['percent']}</span><i>%</i>
+                                        </div>
+                                    </div>";
+                                }else{
+                                   print"<div class=\"item_content fyType\" id=\"feiyong\">
+                                   <div class=\"item_content_label\">
+                                       费用类型：
+                                        </div>
+                                        <div class=\"item_content_text\">
+                                            固定额
+                                        </div>
+                                    </div>
+                                    <div class=\"item_content fy\">
+                                        <div class=\"item_content_label\">
+                                            费率：
+                                        </div>
+                                        <div class=\"item_content_text\">
+                                                <span>{$userinfo['cost']}</span> <i>元</i>
+                                        </div>
+                                    </div>";
+                                }?>
+                        </div>
+                        <div class="costomer_item date_item">
+                            <div class="item_content" id="ifweixin">
+                                <div class="item_content_label">
+                                    关注微信：
+                                </div>
+                                <div class="item_content_text">
+                                    <?php
+                                    if ($userinfo['ifweixin'] == 1) {
+                                        echo "是";
+                                    } else {
+                                        echo "否";
+                                    }?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="incomeDate" style="position:relative">
+                                <input type="text" style="position:absolute;left:0;right:0;width:100%;height:100%;opacity:0" value="<?php echo $userinfo['date']; ?>">
+                                <div class="item_content_label">
+                                    收款日：
+                                </div>
+                                <div class="item_content_text">
+                                    <?php echo trim($userinfo['incomeDate']);?>
+                                </div>
+                            </div>
+                            <div class="item_content" id="income">
+                                <div class="item_content_label">
+                                    金额：
+                                </div>
+                                <div class="item_content_text">
+                                <?php echo $userinfo['income']; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="costomer_item pic_item">
+                            <div class="item_content" id="">
+                                <!-- <a href="<?php echo site_url('admin/customerImg?uid=').$userinfo['uid'];?>">
+                                        <div class="item_content_label">
+                                            查看相关图片
+                                        </div>
+                                </a> -->
+                                <div class="item_content_label">
+                                        资料图片：
+                                 </div>
+                                <div class="item_content_text">
+                                        <?php 
+                                        $url=site_url('admin/customerImg?uid=').$userinfo['uid'];
+                                        if($imgDataState==true){
+                                            
+                                            print("<a href=\"$url \"><span class=\"pic_btn\"> 查看</span> </a>");  
+                                        }else{
+                                            print("<a href=\"$url \"><span class=\"pic_btn2\"> 添加</span> </a>");  
+                                        };?>
+                                          <!-- <a href="<?php echo site_url('admin/customerImg?uid=').$userinfo['uid'];?>">
+                                              <span class="pic_btn">
+                                                添加
+                                              </span>
+                                          </a>     -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="costomer_item remark_item">
+                            <div class="item_content" id="remark">
+                                <div class="item_content_label">
+                                    <span>
+                                        备注：
+                                    </span>
+
+                                </div>
+                                <div class="item_content_text" style="border:1px solid #e2dfdf;border-radius:4px;padding:2px 0;width:96%;min-height:60px;">
+                                <?php echo $userinfo['remark'];?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="page_progress">
+                    <div class="weui-flex page_progress_title">
+                        <div class="weui-flex__item">
+                            <i class="iconfont icon-jindu"></i>进度信息
+                        </div>
+                        <a href="<?php echo site_url('admin/addLoan') . '?uid=' . $userinfo['uid'] . '&name=' . $userinfo['name']; ?>" class="progress_link">+</a>
+                    </div>
+                    <!-- <div class="progress">
+                        <div class="progress_order">2.</div>
+                        <div class="progress_content">
+                            <div class="progress_item">华润银行抵押贷</div>
+                            <div class="progress_item">50
+                                <em>万</em>
+                            </div>
+                            <div class="progress_item">申请成功</div>
+                        </div>
+                    </div> -->
+                    <?php $index = 1;?>
+                    <?php foreach ($process as $key): ?>
+                    <a href="<?php echo site_url('admin/updateLoan') .'?uid='. $userinfo['uid']. '&id=' . $key['id'] . '&name=' . $userinfo['name'];"" ?>">
+
+
+                        <div class="progress">
+                            <div class="progress_order"><?php echo $index?>.</div>
+                            <?php $index+=1;?>
+                            <div class="progress_content">
+                                <div class="progress_item"><?php echo $key['bankProduct'];?></div>
+                                <div class="progress_item"><?php 
+                                    if($key['quota']>0){
+                                        echo ($key['quota']).'万';
+                                    }else{
+                                        echo ($key['applyQuota']).'万';
+                                    }
+                                    ;?>
+                                </div>
+                                <div class="progress_item">
+                                 <?php
+                                    switch ($key['process']) {
+                                        case "0":
+                                            echo '已申请';
+                                            break;
+                                        case "1":
+                                            echo '完成进件';
+                                            break;
+                                        case "2":
+                                            echo '系统审核中';
+                                            break;
+                                        case "3":
+                                            echo '已放款';
+                                            break;
+                                        case "4":
+                                            echo '终审被拒';
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    ?>
+                                </div>
+                            </div>
+                    </div>
+                  </a>
+                    <?php endforeach;?>
+                </div>
+                <div class="loaned_manager">
+                    <div class="weui-flex loaned_manger_title">
+                        <div class="weui-flex__item">
+                            <i class="iconfont icon-jilu"></i>贷后管理
+                        </div>
+                        <a href="<?php echo site_url('admin/loanedRecord') . '?uid=' . $userinfo['uid'] . '&name=' . $userinfo['name']; ?>" class="loaned_link">+</i>
+                    </div>
+                    
+                    <!-- <div class="loaned">
+                        <div class="loaned_content">
+                            <div class="loaned_item">
+                                <span></span>
+                            </div>
+                            <div class="loaned_item">
+                                <span></span>
+                            </div>
+                            <div class="loaned_item">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="loaned">
+                        <?php
+                        $url=site_url('admin/updateRecord');
+                        $s=intval($wrapCount=count($record)/3);
+                        $times=count($record);
+                        if($s==0){
+                            echo '<div class="loaned_content">';
+                            for($i=0;$i<$times;$i++){
+                                
+                                print "<a href=\"{$url}?id={$record[$i]['id']}&name={$userinfo['name']}&uid={$userinfo['uid']}\" class=\"loaned_item\"><span>{$record[$i]['bank']}</span></a>";  
+                            } 
+                            echo '</div>';
+                        }else{
+                            for($a=0;$a<$s;$a++){
+                                echo '<div class="loaned_content">';
+                                   for($j=0;$j<3;$j++){
+                                       print "<a href=\"{$url}?id={$record[$a*3+$j]['id']}&name={$userinfo['name']}&uid={$userinfo['uid']}\" class=\"loaned_item\"><span>{$record[$a*3+$j]['bank']}</span></a>";
+                                   }
+                                echo '</div>';
+                               }
+                            echo '<div class="loaned_content">';
+                            for($i=$s*3;$i<$times;$i++){
+                                       print "<a href=\"{$url}?id={$record[$i]['id']}&name={$userinfo['name']}&uid={$userinfo['uid']}\" class=\"loaned_item\"><span>{$record[$i]['bank']}</span></a>";
+                               }
+                            echo '</div>';
+                            }
+                        ?>
+                    </div>              
+                </div>
+                <div class="del" style="padding:10px 15px;margin:30px auto">
+                    <a href="javascript:;" class="weui-btn weui-btn_warn delCustomer">删除此客户</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tabbar">
+        <?php
+        $this->load->view('weixin/tabbar')
+       ?>
+    </div>
+    </div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script>
+        $(function () {
+            // modify("#date","日期","customers","date");
+            modify("#username","用户名","customers","name");
+            modify("#phone","手机","customers","phone");
+            modify("#identity","身份证号","customers","identity");
+            modify("#source","客户来源","customers","source");
+            modify("#profession","职业","customers","profession");
+            modify("#salary","工资","customers","salary");
+            modify("#requirement","需求","customers","requirement");
+            // modify("#incomeDate","收款日","customers","incomeDate");
+            modify("#income","金额","customers","income");
+            modify("#remark","备注","customers","remark");
+            // modifySex("#sex","性别","customers","sex");
+            // modifyFYType("#feiyong","费用类型","customers","costType");
+            modifyFY(".fy","费率","customers");
+        });
+        // 日期选择
+        $("#incomeDate input").calendar({
+            onChange:function(p, values, displayValues){
+                $("#incomeDate").find('.item_content_text').text(values);
+                console.log(values);
+                var uid = $("#uid").text();
+                $.ajax({
+                    url: '<?php echo site_url("admin/modifyItem");?>',
+                    type: 'get', //GET
+                    async: false, //或false,是否异步
+                    cache: true,
+                    data: {
+                        "table": "customers",
+                        "uid": uid,
+                        "where": "incomeDate",
+                        "value":values[0]
+                        // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                    },
+                    timeout: 5000, //超时时间
+                    dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                    beforeSend: function (xhr) {
+
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                    },
+                    error: function (xhr, textStatus) {
+                     
+                    },
+                    complete: function () {
+                    }
+                })
+            },
+            'dateFormat':'yyyy-mm-dd'
+        });
+        // 日期选择
+        $("#date input").calendar({
+            onChange:function(p, values, displayValues){
+                $("#date").find('.item_content_text').text(values);
+                console.log(values);
+                var uid = $("#uid").text();
+                $.ajax({
+                    url: '<?php echo site_url("admin/modifyItem");?>',
+                    type: 'get', //GET
+                    async: false, //或false,是否异步
+                    cache: true,
+                    data: {
+                        "table": "customers",
+                        "uid": uid,
+                        "where": "date",
+                        "value":values[0]
+                        // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                    },
+                    timeout: 5000, //超时时间
+                    dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                    beforeSend: function (xhr) {
+
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                    },
+                    error: function (xhr, textStatus) {
+                     
+                    },
+                    complete: function () {
+                    }
+                })
+            },
+            'dateFormat':'yyyy-mm-dd'
+        });
+        // 选择费用类型
+        $("#feiyong").select(
+            {
+                title: "选择性别",
+                items: [{
+                    title: "百分比",
+                    value: 0
+                },
+                {
+                    title: "固定额",
+                    value: 1
+                }],
+                onChange:function(input){
+                    var uid = $("#uid").text();
+                    $("#feiyong").find('.item_content_text').text(input.titles);
+                    if (input.values == "0") {
+                        costType = 0;
+                        if ($("#feiyong").hasClass("ispercent")) {
+
+                        } else {
+                            $("#feiyong").addClass("ispercent");
+                            $('.fy').find('.item_content_text>span').text("0");
+                            $('.fy').find('.item_content_text>i').text("%");
+                        }
+                    } else if (input.values == "1") {
+                        costType = 1;
+                        $("#feiyong").removeClass("ispercent");
+                        $('.fy').find('.item_content_text>span').text("0");
+                        $('.fy').find('.item_content_text>i').text("元");
+                    }
+                    $.ajax({
+                                url: '<?php echo site_url("admin/modifyItem");?>',
+                                type: 'get', //GET
+                                async: false, //或false,是否异步
+                                cache: true,
+                                data: {
+                                    "table": "customers",
+                                    "uid": uid,
+                                    "where": "costType",
+                                    "value": input.values
+                                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                },
+                                timeout: 5000, //超时时间
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                beforeSend: function (xhr) {
+
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                },
+                                error: function (xhr, textStatus) {
+
+                                },
+                                complete: function () {
+
+                                }
+                            })
+                }
+            }
+        );
+        $('.delCustomer').click(function () {
+                $.confirm({
+                    title: '确认删除',
+                    text: '包含个人信息,贷款进度,还款信息,微信绑定全部功能不可恢复！',
+                    onOK: function () {
+                        $.ajax({
+                            url: '<?php echo site_url("admin/delCustomer");?>',
+                            type: 'post', //GET
+                            async: true, //或false,是否异步
+                            cache: true,
+                            data: {
+                                '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                'uid': $("#uid").text()
+                            },
+                            timeout: 5000, //超时时间
+                            dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                            beforeSend: function (xhr) {
+
+                            },
+                            success: function (data, textStatus, jqXHR) {
+                                if (data['state'] == 'ok') {
+                                    $.toptip('操作成功', 'success');
+                                    window.location.href = "<?php echo site_url('admin'); ?>"
+                                }
+                            },
+                            error: function (xhr, textStatus) {
+
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                    },
+                    onCancel: function () { }
+                });
+            });
+        
+        // 选择性别
+        $("#sex").select({
+                title: "选择性别",
+                items: [{
+                    title: "男",
+                    value: 1
+                },
+                {
+                    title: "女",
+                    value: 0
+                }],
+                onChange:function(input){
+                    console.log(input);
+                    var uid = $("#uid").text();
+                    $("#sex").find('.item_content_text').text(input.titles);
+                    $.ajax({
+                                url: '<?php echo site_url("admin/modifyItem");?>',
+                                type: 'get', //GET
+                                async: false, //或false,是否异步
+                                cache: true,
+                                data: {
+                                    "table": "customers",
+                                    "uid": uid,
+                                    "where": "sex",
+                                    "value": input.values
+                                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                },
+                                timeout: 5000, //超时时间
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                beforeSend: function (xhr) {
+
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                },
+                                error: function (xhr, textStatus) {
+
+                                },
+                                complete: function () {
+
+                                }
+                            })
+                }
+            })
+        
+        
+        
+        
+        
+        
+        
+        function modifyFY(id,modifyTitle,table) {
+                $(".page_customer").on('click', id, function () {
+                    //如果参数过多，建议通过 object 方式传入
+                    var $that = $(this);
+                    var text= $.trim($that.find('.item_content_text>span').text());
+                    var uid = $("#uid").text();
+                    var where="percent";
+                    var value='';
+                    $.prompt({
+                        title: modifyTitle,
+                        // text: '请输入要修改的姓名',
+                        input:text,
+                        empty: false, // 是否允许为空
+                        onOK: function (input) {
+                            if($("#feiyong").hasClass("ispercent")){
+                                 where="percent";
+                            }else{
+                                 where="cost";
+                            }
+                          
+                            $.ajax({
+                                url: '<?php echo site_url("admin/modifyItem");?>',
+                                type: 'get', //GET
+                                async: false, //或false,是否异步
+                                cache: true,
+                                data: {
+                                    "table": table,
+                                    "uid": uid,
+                                    "where":where,
+                                    "value":input
+                                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                },
+                                timeout: 5000, //超时时间
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                beforeSend: function (xhr) {
+
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                    if(data.state=='ok'){
+                                        $that.find('.item_content_text>span').text($.trim(input));
+                                    }
+                                },
+                                error: function (xhr, textStatus) {
+
+                                },
+                                complete: function () {
+
+                                }
+                            })
+                        },
+                        onCancel: function () {
+                            //点击取消
+                        }
+                    });
+                });
+            }
+            // 
+
+         $(".page_customer").on('click', "#weui-prompt-input", function () {
+                  alert(1);
+            });
+        function modifyFYType(id, modifyTitle, table, where) {
+                    $(".page_customer").on('click', id, function () {
+                        //如果参数过多，建议通过 object 方式传入
+                        var $that = $(this);
+                        var text = $.trim($that.find('.item_content_text').text());
+                        var uid = $("#uid").text();
+                        var costType = 0;
+                        $.prompt({
+                            title: modifyTitle,
+                            // text: '请输入要修改的姓名',
+                            input: text,
+                            empty: false, // 是否允许为空
+                            onOK: function (input) {
+                                if (input =="百分比") {
+                                    costType = 0;
+                                    if ($that.hasClass("ispercent")) {
+                                       
+                                    }else{
+                                        $that.addClass("ispercent");
+                                        $('.fy').find('.item_content_text>span').text("0");
+                                        $('.fy').find('.item_content_text>i').text("%");
+                                    }     
+                                } else if(input =="固定额"){
+                                    costType = 1;
+                                    $that.removeClass("ispercent");
+                                    $('.fy').find('.item_content_text>span').text("0");
+                                    $('.fy').find('.item_content_text>i').text("元");
+                                }
+                                $.ajax({
+                                    url: '<?php echo site_url("admin/modifyItem");?>',
+                                    type: 'get', //GET
+                                    async: false, //或false,是否异步
+                                    cache: true,
+                                    data: {
+                                        "table": table,
+                                        "uid": uid,
+                                        "where": where,
+                                        "value": costType
+                                        // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                    },
+                                    timeout: 5000, //超时时间
+                                    dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                    beforeSend: function (xhr) {
+
+                                    },
+                                    success: function (data, textStatus, jqXHR) {
+                                        if (data.state == 'ok') {
+                       
+                                            $that.find('.item_content_text').text($.trim(input));
+                                        }
+                                    },
+                                    error: function (xhr, textStatus) {
+
+                                    },
+                                    complete: function () {
+
+                                    }
+                                })
+                            },
+                            onCancel: function () {
+                                //点击取消
+                            }
+                        });
+                    });
+                }   
+        function modify(id,modifyTitle,table,where) {
+                $(".page_customer").on('click', id, function () {
+                    //如果参数过多，建议通过 object 方式传入
+                    var $that = $(this);
+                    var text= $.trim($that.find('.item_content_text').text());
+                    var uid = $("#uid").text();
+                    $.prompt({
+                        title: modifyTitle,
+                        // text: '请输入要修改的姓名',
+                        input:text,
+                        empty: false, // 是否允许为空
+                        onOK: function (input) {
+                            $.ajax({
+                                url: '<?php echo site_url("admin/modifyItem");?>',
+                                type: 'get', //GET
+                                async: false, //或false,是否异步
+                                cache: true,
+                                data: {
+                                    "table": table,
+                                    "uid": uid,
+                                    "where": where,
+                                    "value": input
+                                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                },
+                                timeout: 5000, //超时时间
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                beforeSend: function (xhr) {
+
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                    if(data.state=='ok'){
+                                        $that.find('.item_content_text').text($.trim(input));
+                                    }             
+                                },
+                                error: function (xhr, textStatus) {
+
+                                },
+                                complete: function () {
+
+                                }
+                            })
+                        },
+                        onCancel: function () {
+                            //点击取消
+                        }
+                    });
+                });
+            }   
+        function modifySex(id,modifyTitle,table,where) {
+                $(".page_customer").on('click', id, function () {
+                    //如果参数过多，建议通过 object 方式传入
+                    var $that = $(this);
+                    var text= $.trim($that.find('.item_content_text').text());
+                    var uid = $("#uid").text();
+                    var sex=0;
+                   
+                    $.prompt({
+                        title: modifyTitle,
+                        // text: '请输入要修改的姓名',
+                        input:text,
+                        empty: false, // 是否允许为空
+                        onOK: function (input) {
+                            var inputText=$.trim(input);
+                            if (inputText == "男") {
+                                sex = 1;
+                            } else if (inputText == "女"){
+                                sex = 0;
+                            } else {
+                                sex = 0;
+                            }
+                            $.ajax({
+                                url: '<?php echo site_url("admin/modifyItem");?>',
+                                type: 'get', //GET
+                                async: false, //或false,是否异步
+                                cache: true,
+                                data: {
+                                    "table": table,
+                                    "uid": uid,
+                                    "where": where,
+                                    "value": sex
+                                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                },
+                                timeout: 5000, //超时时间
+                                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                                beforeSend: function (xhr) {
+
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                    if(data.state=='ok'){
+                                        $that.find('.item_content_text').text(input);
+                                    }
+                                },
+                                error: function (xhr, textStatus) {
+
+                                },
+                                complete: function () {
+
+                                }
+                            })
+                        },
+                        onCancel: function () {
+                            //点击取消
+                        }
+                    });
+                });
+            }    
+        function modifyItem(table,uid, where, value) {
+            var state="";
+            $.ajax({
+                url: '<?php echo site_url("admin/modifyItem");?>',
+                type: 'get', //GET
+                async: false, //或false,是否异步
+                cache: true,
+                data: {
+                    "table":table,
+                    "uid":uid,
+                    "where":where,
+                    "value":value
+                    // '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                },
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+
+                },
+                success: function (data, textStatus, jqXHR) {
+                    state=data.state;
+                },
+                error: function (xhr, textStatus) {
+
+                },
+                complete: function () {
+                   
+                }
+            });
+            return state;
+    }
+</script>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/process.css'); ?>">
+    <title>我的贷款详情</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">
+            申请进度查询
+        </div>
+        <div class="p_tips">
+            <p>
+                <?php 
+                    if($res['quota']>0){
+                        if($res['costType']==0){
+                            $cost=($res['percent']/100)*$res['quota']*10000;
+                            $money=intval($res['quota']);
+                            print("尊敬的{$res['name']}：你好！您本次申请的{$res['bankProduct']}贷款金额为{$money}万元，利率为{$res['rate']}%,服务费用{$cost}元。");
+                        }else if($res['costType']==1){
+                            $cost=intval(($res['cost']/($res['requirement']))*$res['quota']);
+                            $money=intval($res['quota']);
+                            print("尊敬的{$res['name']}：你好！您本次申请的{$res['bankProduct']}贷款金额为{$money}万元，利率为{$res['rate']}%,服务费用{$cost}元。");
+                        }
+                    }else{
+                        if($res['costType']==0){
+                            $cost=intval(($res['percent']/100)*$res['applyQuota']*10000);
+                            $money=intval($res['applyQuota']);
+                            print("尊敬的{$res['name']}：你好！您本次申请的{$res['bankProduct']}贷款金额为{$money}万元，利率为{$res['rate']}%,服务费用{$cost}元。");
+                        }else if($res['costType']==1){
+                            $money=intval($res['applyQuota']);
+                            $cost=intval(($res['cost']/($res['requirement']))*$res['applyQuota']);
+                            print("尊敬的{$res['name']}：你好！您本次申请的{$res['bankProduct']}贷款金额为{$money}万元，利率为{$res['rate']}%,服务费用{$cost}元。");
+                        }
+                    }
+                    
+                ;?>
+               
+            </>
+        </div>
+        <div class="p_process">
+            <?php
+                $state=$res['process'];
+                $remark=$res['remark'];
+                $applyTime=empty($res['applyTime'])?' ':$res['applyTime'];
+                $fileTime=empty($res['dealTime'])?' ': $res['dealTime'];
+                $checkingTime=empty($res['checkTime'])?' ':$res['checkTime'];
+                $loanedTime=empty($res['loanedingTime'])? ' ':$res['loanedingTime'];
+                switch ($state){
+                    case "0":
+                    print ("<ul class=\"p_list p_go0\"><li class=\"p_compelete p_current\"><p class=\"time\">{$applyTime}</p><p class=\"content\">已申请<em>感谢您选择贷呗正规贷款服务</em></p><span class=\"remark\">{$remark}</span></li><li class=\"\"><p class=\"time\">{$fileTime}</p><p class=\"content\">完成进件</p></li><li><p class=\"time\">{$checkingTime}</p><p class=\"content\"> 系统审核中</p></li><li><p class=\"time\">{$loanedTime}</p><p class=\"content\">成功放款</p></li></ul>") ;   
+                    
+                    break;
+                    case "1":
+                    print ("<ul class=\"p_list p_go1\"><li class=\"p_compelete\"><p class=\"time\">{$applyTime}</p><p class=\"content \">已申请<em>感谢您选择贷呗正规贷款服务</em></p></li><li class=\"p_compelete p_current\"><p class=\"time\">{$fileTime}</p><p class=\"content\">完成进件<em>所需资料已提交完整</em></p><span class=\"remark\">{$remark}</span></li><li class=\"\"><p class=\"time\">{$checkingTime}</p><p class=\"content\"> 系统审核中</li><li><p class=\"time\">{$loanedTime}</p><p class=\"content\">成功放款</p></li></ul>") ;   
+                    
+                    break;
+                    case "2":
+                    print ("<ul class=\"p_list p_go2\"><li class=\"p_compelete\"><p class=\"time\">{$applyTime}</p><p class=\"content\">已申请<em>感谢您选择贷呗正规贷款服务</em></p></li ><li class=\"p_compelete\"><p class=\"time\">{$fileTime}</p><p class=\"content\">完成进件<em>所需资料已提交完整</em></p></li><li class=\"p_compelete p_current\"><p class=\"time\">{$checkingTime}</p><p class=\"content\"> 系统审核中<em>终审结果已出</em></p><span class=\"remark\">{$remark}</span></li><li class=\"\"><p class=\"time\">{$loanedTime}</p><p class=\"content\">成功放款</p></li></ul>") ;   
+                    
+                    break;
+                    case "3":
+                    print ("<ul class=\"p_list p_go3\"><li class=\"p_compelete\"><p class=\"time\">{$applyTime}</p><p class=\"content\">已申请<em>感谢您选择贷呗正规贷款服务</em></p></li ><li class=\"p_compelete\"><p class=\"time\">{$fileTime}</p><p class=\"content\">完成进件<em>所需资料已提交完整</em></p></li><li class=\"p_compelete\"><p class=\"time\">{$checkingTime}</p><p class=\"content\"> 系统审核中<em>终审结果已出</em></p></li><li class=\"p_compelete p_current\"><p class=\"time\">{$loanedTime}</p><p class=\"content\">成功放款<em>恭喜您成功获得优质贷款！</em></p><span class=\"remark\">{$remark}</span></li></ul>") ;                       
+                    break;
+                    case "4":
+                    print ("<ul class=\"p_list p_go3\"><li class=\"p_compelete\"><p class=\"time\">{$applyTime}</p><p class=\"content\">已申请<em>感谢您选择贷呗正规贷款服务</em></p></li ><li class=\"p_compelete\"><p class=\"time\">{$fileTime}</p><p class=\"content\">完成进件<em>所需资料已提交完整</em></p></li><li class=\"p_compelete\"><p class=\"time\">{$checkingTime}</p><p class=\"content\"> 系统审核中<em>终审结果已出</em></p></li><li class=\"p_compelete p_current\"><p class=\"time\">{$loanedTime}</p><p class=\"content\">终审被拒<em>请不要灰心 胜利就在前方</em></p><span class=\"remark\">{$remark}</span></li></ul>") ;                       
+                    break;
+                    default:
+                    echo "";
+                }
+                ?>
+        </div>
+        <div class="contact_us">
+            <span id="flesh" onclick="reflesh()">刷新状态</span>
+            <span onclick="timeup()">免费加急</span>
+            <span><a href="tel:020-22043968">联系我们</a></span>
+        </div>
+    </div>
+    <div class="footer">
+            <p>版权所有 ©贷呗金融 未经许可不得复制,违者必究!</p>
+            <p class="weui-footer__text">Copyright © Daibei Finance Co., Ltd. All Rights Reserved</p>
+    </div>
+</body>
+<script>
+    window.alert = function(name){  
+             var iframe = document.createElement("IFRAME");  
+            iframe.style.display="none";  
+            iframe.setAttribute("src", 'data:text/plain,');  
+            document.documentElement.appendChild(iframe);  
+            window.frames[0].window.alert(name);  
+            iframe.parentNode.removeChild(iframe);  
+        }  
+    function reflesh(){
+        location.reload();
+    }
+    function timeup(){
+        alert("加急成功！我们会为您火速办理本笔贷款，当前排队客户较多，请耐心等待配合，谢谢！");
+    }
+</script>
+</html>

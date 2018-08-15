@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/updatead.css');?>">
+    <title></title>
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab4" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <p class="updatead_title">
+                        <?php echo $ad['year']?>年度广告费用修改
+                </p>
+                <div class="adcost_page">
+                    <form action="<?php echo site_url('admin/updateADcost')?>" method="POST" id="update_adcost">
+                        <div class="aditem">
+                            <div class="item">
+                                <span>一月</span>
+                                <input type="text" name="Jan" value="<?php echo $ad['Jan']?>">
+                            </div>
+                            <div class="item">
+                                <span>二月</span>
+                                <input type="text" name="Feb" value="<?php echo $ad['Feb']?>">
+                            </div>
+                            <div class="item">
+                                <span>三月</span>
+                                <input type="text" name="Mar" value="<?php echo $ad['Mar']?>" >
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>四月</span>
+                                <input type="text" name="Apr" value="<?php echo $ad['Apr']?>">
+                            </div>
+                            <div class="item">
+                                <span>五月</span>
+                                <input type="text" name="May" value="<?php echo $ad['May']?>">
+                            </div>
+                            <div class="item">
+                                <span>六月</span>
+                                <input type="text" name="Jun" value="<?php echo $ad['Jun']?>">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>七月</span>
+                                <input type="text" name="Jul" value="<?php echo $ad['Jul']?>">
+                            </div>
+                            <div class="item">
+                                <span>八月</span>
+                                <input type="text" name="Aug" value="<?php echo $ad['Aug']?>">
+                            </div>
+                            <div class="item">
+                                <span>九月</span>
+                                <input type="text" name="Sept" value="<?php echo $ad['Sept']?>">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>十月</span>
+                                <input type="text" name="Oct" value="<?php echo $ad['Oct']?>">
+                            </div>
+                            <div class="item">
+                                <span>十一月</span>
+                                <input type="text" name="Nov" value="<?php echo $ad['Nov']?>">
+                            </div>
+                            <div class="item">
+                                <span>十二月</span>
+                                <input type="text" name="Dec" value="<?php echo $ad['Dec']?>">
+                            </div>
+                        </div>
+                        <div class="btn_submit">
+                                <a href="javascript:;" class="weui-btn weui-btn_primary update_adcost">修改</a>
+                        </div>
+                        <div class="del" style="padding:10px 15px;margin:30px auto">
+                                <a href="javascript:void(0);" class="weui-btn weui-btn_warn delad">删除</a>
+                        </div>
+                        <input type="hidden" value="<?php echo $sess_id?>" name="sid">
+                        <input type="hidden" value="<?php echo $id?>" name="id" id="aid">
+                        <?php csrf_hidden();?>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+         $this->load->view('weixin/tabbar')
+        ?>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        //  提交表单
+         $('.update_adcost').click(function (event){
+            event.preventDefault();
+            var form = $("#update_adcost");
+            if (!form.hasClass('fupload')) {
+                //普通表单
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                }).success(function (data, textStatus, jqXHR) {
+                    if (data.state == 'ok') {
+                        $.toast("更新成功");
+                        location.href=document.referrer;
+                    }
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                    $.toast("更新失败");
+                    location.href=document.referrer;
+                });
+            }
+            else {
+                // mulitipart form,如文件上传类
+                var formData = new FormData(this);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                }).success(function () {
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                });
+            };
+        });
+        $('.delad').click(function () {
+                $.confirm({
+                    title: '确认删除',
+                    text: '确认删除此年度的广告费用吗？',
+                    onOK: function () {
+                        $.ajax({
+                            url: '<?php echo site_url("admin/delad");?>',
+                            type: 'post', //GET
+                            async: true, //或false,是否异步
+                            cache: true,
+                            data: {
+                                '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                                'aid': $("#aid").val()
+                            },
+                            timeout: 5000, //超时时间
+                            dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                            beforeSend: function (xhr) {
+   
+                            },
+                            success: function (data, textStatus, jqXHR) {
+                                if (data['state'] == 'ok') {
+                                    $.toptip('操作成功', 'success');
+                                    window.location.href = "<?php echo site_url('admin/adlist'); ?>"
+                                }
+                            },
+                            error: function (xhr, textStatus) {
+
+                            },
+                            complete: function () {
+
+                            }
+                        });
+                    },
+                    onCancel: function () { }
+                });
+            });
+        
+        // 选择性别
+    });
+</script>
+<link rel="stylesheet" href="<?php echo base_url('static/js/exif.js');?>">
+</html>

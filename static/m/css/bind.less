@@ -1,0 +1,101 @@
+@charset "utf-8";
+.bind_title {
+    text-align: center;
+    color: #1aad19;
+    width: 100%;
+    margin: 50px 0 30px;
+}
+
+.item {
+    padding:20px 15px;
+    label {
+        text-align: center;
+    }
+    .weui-cell__bd {
+        position: relative;
+        border: 1px solid #d4d4d4;
+        label {
+            position: absolute;
+            top: 100%;
+            font-size: 13px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: #f11414;
+        }
+    }
+}
+
+.sub_wrap {
+    margin-top: 40px;
+}
+
+.item {
+    .weui-cell__hd {
+        &>label {
+            width: 75px;
+        }
+       
+    }
+    .weui-cell__bd {
+        &>input {
+            display: block;
+            box-sizing: border-box;
+            padding-left:10px;
+        }
+    }
+    .weui-cell_vcode {
+        .weui-cell__hd {
+            -webkit-box-flex: 0.8;
+            -webkit-flex: 0.8;
+            flex: 0.8;
+        }
+        .weui-cell__ft {
+            -webkit-box-flex: 0.2;
+            -webkit-flex: 0.2;
+            flex: 0.2;
+        }
+    }
+    .weui-btn_disabled {
+        color: hsla(0, 0%, 100%, .6);
+    }
+    button.weui-vcode-btn {
+        border-top: 0;
+        border-right: 0;
+        border-bottom: 0;
+        outline: 0;
+    }
+    .w_disabled {
+        color: hsla(0, 0%, 100%, .6)!important;
+    }
+    .weui-vcode-btn {
+        display: inline-block;
+        padding: 0 .6em 0 .7em;
+        height: 27px;
+        line-height: 27px;
+        font-size: 14px;
+        background: #1aad19;
+        color: #fff;
+        border: none;
+    }
+    .weui-vcode-btn,
+    .weui-vcode-img {
+        margin-left: 5px;
+        vertical-align: middle;
+    } 
+    
+}
+// 样式重置
+div.weui-cell_vcode {
+    padding: 20px 15px;
+}
+.weui-cells_form{
+    &::before{
+        top: 0;
+        border-top:0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+    }
+}

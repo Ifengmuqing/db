@@ -1,0 +1,111 @@
+@charset "utf-8";
+@import '../../less/common.less';
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    background: #ebebeb;
+    -webkit-text-size-adjust: 100% !important;
+}
+.weui-tabbar__icon>i,
+i.weui-tabbar__icon {
+    font-size: 18px;
+    color: #225fbb;
+}
+.weui-tabbar__icon{
+    margin:5px;
+}
+.weui-tabbar__label {
+    font-size: 14px;
+    padding: 5px;
+}
+.upload_item{
+    position: relative;
+}
+.upload_checkbox{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 22px;
+    z-index: 99;
+}
+
+.upload_checkbox input[type=checkbox] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    vertical-align:middle;
+}
+.upload_checkbox input[type=checkbox] {
+    border:0;
+    border-radius:0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline:none;
+    background: url(http://gtms03.alicdn.com/tps/i3/T1bMh.FxNXXXb_r3IF-72-730.png) no-repeat 0 0;
+    background-position: -19px -710px;
+}
+.upload_checkbox input[type=checkbox]:checked {
+    background-position: -37px -710px;
+}
+.weui-uploader__del{
+    float: left;
+    position: relative;
+    margin-right: 9px;
+    margin-bottom: 9px;
+    width: 77px;
+    height: 77px;
+    border: 1px solid #d9d9d9;
+    &:after{
+        content: " ";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 39.5px;
+        height: 2px;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        background-color: #d9d9d9;
+    }
+}
+// 样式重置
+.weui-cells {
+    margin-top: 1.17647059em;
+    line-height: 1.47058824;
+    background-color: transparent;
+    font-size: 17px;
+    overflow: hidden;
+    position: relative;
+}
+// .weui-uploader__file {
+//     float: left;
+//     margin-right: 9px;
+//     margin-bottom: 9px;
+//     width: 79px;
+//     height: 79px;
+//     background: no-repeat 50%;
+//     background-size: unset;
+//     background-color: #fff;
+// }
+.weui-photo-browser-modal {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    display: none;
+    opacity: 0;
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+}

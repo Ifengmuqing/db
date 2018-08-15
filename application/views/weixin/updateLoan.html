@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/addLoan.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <title><?php  echo $name ?>的贷款信息</title>
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item ">
+            </div>
+            <div id="tab2" class="weui-tab__bd-item weui-tab__bd-item--active">
+                    
+                <div class="add_page">
+                    <div class="show_page" style="">
+                                <div class="weui-flex page_title">
+                                    <div class="weui-flex__item">
+                                        <i class="iconfont icon-jindu"></i>进度修改
+                                    </div>              
+                                </div>             
+                    </div>
+                    <form action="<?php echo site_url('admin/handleUpdateLoan'); ?>" id="update_loan_recond" method="post">
+                        <div class="weui-cells weui-cells_form add_page_form">
+                            <div class="weui-cell add_form_item" style="display:none">
+                                        <div class="weui-cell__hd">
+                                            <label for="" class="weui-label">用户id</label>
+                                        </div>
+                                        <div class="weui-cell__bd checktip">
+                                            <input class="weui-input" type="text" value="<?php echo $uid?>" placeholder="" name="uid">  
+                                        </div>
+                            </div>
+                            <div class="weui-cell add_form_item" style="display:none">
+                                        <div class="weui-cell__hd">ss
+                                            <label for="" class="weui-label">贷款记录id</label>
+                                        </div>
+                                        <div class="weui-cell__bd checktip">
+                                            <input class="weui-input" type="text" value="<?php echo $id?>" placeholder="" name="id" id="loanid">  
+                                        </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                <div class="weui-cell__hd">
+                                    <label for="" class="weui-label">申请时间</label>
+                                </div>
+                                <div class="weui-cell__bd checktip">
+                                    <input class="weui-input" type="text" value="<?php echo $process['applyTime']?>" placeholder="" name="applyTime" id="applyTime">  
+                                </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label ">产&emsp;&emsp;品</label>
+                                </div>
+                                <div class="weui-cell__bd checktip">
+                                    <input class="weui-input" type="text" placeholder="" name="bankProduct" value="<?php echo $process['bankProduct']?>">
+                                </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label ">利&emsp;&emsp;率</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="" name="rate" value="<?php echo $process['rate']?>">
+                                    </div>
+                            </div>
+                            <div class="weui-cell  add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">申请金额(万)</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="" name="applyQuota" value="<?php echo  number_format($process['applyQuota'], 0, '', '')?>">
+                                    </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label ">办理进度</label>
+                                </div>
+                                <div class="weui-cell__bd checktip update_select">
+                                    <select class="weui-select" name="process">
+                                            <option value="0" <?php if($process['process']=="0" ) echo "selected='selected'";?>>已申请</option>
+                                            <option value="1" <?php if($process['process']=="1" ) echo "selected='selected'";?>>完成进件</option>
+                                            <option value="2" <?php if($process['process']=="2" ) echo "selected='selected'";?>>系统审核中</option>
+                                            <option value="3" <?php if($process['process']=="3" ) echo "selected='selected'";?>>已放款</option>
+                                            <option value="4" <?php if($process['process']=="4" ) echo "selected='selected'";?>>终审被拒</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                          
+                            <div class="weui-cell add_form_item">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">进件时间</label>
+                                </div>
+                                <div class="weui-cell__bd checktip">
+                                    <input class="weui-input" type="text" placeholder="" name="dealTime" id="dealTime" value="<?php echo $process['dealTime']?>">
+                                </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">审核时间</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="" name="checkTime" id="checkTime" value="<?php echo $process['checkTime']?>">
+                                    </div>
+                            </div>
+                            <div class="weui-cell add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label">放款时间</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="" name="loanedingTime" id="loanedingTime" value="<?php echo $process['loanedingTime']?>">
+                                    </div>
+                            </div>
+                            <div class="weui-cell  add_form_item">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label  ">实际批款(万)</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                        <input class="weui-input" type="text" placeholder="" name="quota" value="<?php if($process['quota']>0){
+                                            echo $process['quota'];
+                                        }?>">
+                                    </div>
+                            </div>  
+                            <div class="weui-cell add_form_item remark">
+                                    <div class="weui-cell__hd">
+                                        <label class="weui-label" style="color:#f14a4a">微信提醒</label>
+                                    </div>
+                                    <div class="weui-cell__bd checktip">
+                                            <div class="weui-cells remark">
+                                                    <div class="weui-cell">
+                                                        <div class="weui-cell__bd">
+                                                            <textarea class="weui-textarea" placeholder="最多44个汉字" rows="3" name="remark" maxlength="44" value="" style="font-size:16x;"><?php echo trim($process['remark']);?></textarea>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                            </div>   
+                            <div class="weui-btn-area add_save">
+                                <a class="weui-btn weui-btn_primary" href="javascript:void(0)" id="update-submit">保存</a>
+                            </div>
+                            <div class="del" style="padding:10px 15px;margin:10px auto">
+                                    <a href="javascript:;" class="weui-btn weui-btn_warn" id="delLoan">删除本笔贷款</a>
+                            </div>
+                        </div>
+                        <?php csrf_hidden();?>
+                    </form>
+
+                </div>
+            </div>
+            <div id="tab4" class="weui-tab__bd-item ">
+              
+                
+            </div>
+        </div>
+        <?php
+         $this->load->view('weixin/tabbar')
+        ?>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/localization/messages_zh.min.js"></script> -->
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    $(function () {
+        //时间组件初始化
+        $("#applyTime").datetimePicker({
+            'inputReadOnly':false
+        });
+        $("#dealTime").datetimePicker({
+            'inputReadOnly':false
+        });
+        $("#checkTime").datetimePicker({
+            'inputReadOnly':false
+        });
+        $("#loanedingTime").datetimePicker({
+            'inputReadOnly':false
+        });
+        $("#update_loan_recond").validate({
+            rules: {
+                applyTime:{
+                    required: true,
+                },
+                bankProduct:{
+                    required:true,
+                    maxlength:16
+                },
+                rate: {
+                    required: true,
+                },
+                applyQuota:{
+                    required: true,
+                }
+
+            },
+            messages: {
+                applyTime:{
+                    required: "请选择申请时间",
+                },
+                bankProduct:{
+                    required:"请输入产品名称",
+                    maxlength:"超出最大长度"
+                },
+                rate:{
+                    required: "请输入产品利率",
+                },
+                applyQuota:{
+                    required: "请输入申请金额",
+                }
+            }, 
+        });
+        $('#delLoan').click(function () {
+            $.confirm({
+                title: '确认删除',
+                text: '您确定要删除这条贷款记录吗',
+                onOK: function () {
+                    $.ajax({
+                        url: '<?php echo site_url("admin/delLoan");?>',
+                        type: 'post', //GET
+                        async: true, //或false,是否异步
+                        cache: true,
+                        data: {
+                            '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                            'loanid': $("#loanid").val()
+                        },
+                        timeout: 5000, //超时时间
+                        dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                        beforeSend: function (xhr) {
+
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                            if (data['state'] == 'ok') {
+                                $.toptip('操作成功', 'success');
+                                window.location.href = "<?php echo site_url('admin/customerDetials').'?uid='.$uid;;?>"
+                            }
+                        },
+                        error: function (xhr, textStatus) {
+
+                        },
+                        complete: function () {
+
+                        }
+                    });
+                },
+                onCancel: function () {
+                }
+            });
+        })
+        //提交表单
+        $('#update-submit').click(function (event){
+            if (!$("#update_loan_recond").valid()) {
+                return;
+            }
+            var form = $("#update_loan_recond");
+            if (!form.hasClass('fupload')) {
+                //普通表单
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                }).success(function (data, textStatus, jqXHR) {
+                    if (data.state == 'ok') {
+                        $.toast("更新成功");
+                        location.href=document.referrer;
+                    }
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                    $.toast("更新失败");
+                    location.href=document.referrer;
+                });
+            }
+            else {
+                // mulitipart form,如文件上传类
+                var formData = new FormData(this);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                }).success(function () {
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                });
+            };
+        });
+    });
+</script>
+
+</html>

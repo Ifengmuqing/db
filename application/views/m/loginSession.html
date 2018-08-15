@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/reset.css'); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/login.css'); ?>" />
+    <title>登录</title>
+</head>
+
+<body  style="background-image:url(<?php echo base_url('static/m/images/login-bg.png');?>)">
+    <div class="container">
+        <div class="login_wrap">
+
+            <div class="login_title">
+
+                welcome
+            </div>
+            <div class="err">
+                用户名或密码错误
+            </div>
+            <div class="login_box">
+                <form action="<?php echo site_url('admin/login/handleLogin');?>" id="login_form" method="post">
+
+                    <div class="item">
+                        <input type="text" name="username" placeholder="用户名">
+                    </div>
+                    <div class="item">
+                        <input type="password" name="password" placeholder="密码">
+                    </div>
+                    <div class="item">
+                        <button class="login_btn" type="submit">立即登录</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    $(function () {
+        $("#login_form").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 2
+                },
+                password: {
+                    required: true,
+                    maxlength: 6,
+                    maxlength: 16,
+                },
+            },
+            messages: {
+                username: {
+                    required: "*请输入用户名",
+                    minlength: "用户名必需由两个字母组成"
+                },
+                password: {
+                    required: "*请输入密码",
+                    maxlength: "*最少六个字母",
+                    minlength: "*最多十六个字母",
+                },
+            }
+        });
+    })
+</script>
+
+</html>

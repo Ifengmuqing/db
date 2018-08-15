@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="<?php echo base_url('static/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/css/db.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <title>【贷呗官网】广州贷呗个人信用贷款咨询与服务平台|互联网金融公司</title>
+</head>
+
+<body>
+    <div class="header">
+        <img src="<?php echo base_url('static/images/lp-logo.png');?>" alt="">
+    </div>
+    <div class="register-box">
+        <div class="register-wrap">
+            <div class="flip-container">
+                <div class="flipper">
+                    <div class="front">
+                        <div class="register">
+                            <div class="registHead">
+                                <h2>免费领取额度</h2>
+                            </div>
+                            <div class="registMiddle" style="border-color: rgb(179, 188, 197);">
+                                <div class="phone">
+                                    <img class="phoneImg" src="<?php echo base_url('static/images/tel.png'); ?>">
+                                    <input type="text" placeholder="请输入您的手机号" maxlength="11" id="mobile" name="phone">
+                                </div>
+                            </div>
+                            <p id="promptText"></p>
+                            <div class="registSumbit" id="phoneSumbit">
+                                <span>免费领取</span>
+                            </div>
+                            <div class="weixin">
+                                <span>微信领取</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="qrcode">
+                            <img src="<?php echo base_url('static/images/qrcode.jpg'); ?>" alt="">
+                            <p>请用微信扫描二维码</p>
+                        </div>
+                        <div class="back_btn">
+                            返回
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="process">
+        <img src="<?php echo base_url('static/images/group21.png'); ?>">
+    </div>
+    <div class="loan_way">
+        <div class="loan_banner">
+            <img src="" alt="">
+        </div>
+        <div class="slider">
+            <div class="slider_phone">
+
+            </div>
+            <div class="slider_images">
+                <div class="slider_item" style="z-index: 12;">
+                    <img src="<?php echo base_url('static/images/s-gjj.png');?>">
+                </div>
+                <div class="slider_item" style="z-index: 10;">
+                    <img src="<?php echo base_url('static/images/s-js.png'); ?>">
+                </div>
+                <div class="slider_item" style="z-index: 9;">
+                    <img src="<?php echo base_url('static/images/s-jy.png'); ?>">
+                </div>
+                <div class="slider_item active" style="z-index: 13;">
+                    <img src="<?php echo base_url('static/images/s-sx.png'); ?>">
+                </div>
+            </div>
+            <div class="slider_dots J_slide">
+                <ul>
+                    <li>
+                        <img src="<?php echo base_url('static/images/s-gjj-d.png'); ?>">
+                        <img src="<?php echo base_url('static/images/s-gjj-d-active.png'); ?>" class="hover">
+                    </li>
+                    <li>
+                        <img src="<?php echo base_url('static/images/s-js-d.png'); ?>">
+                        <img src="<?php echo base_url('static/images/s-js-d-active.png'); ?>" class="hover">
+                    </li>
+                    <li>
+                        <img src="<?php echo base_url('static/images/s-jy-d.png'); ?>">
+                        <img src="<?php echo base_url('static/images/s-jy-d-active.png'); ?>" class="hover">
+                    </li>
+                    <li>
+                        <img src="<?php echo base_url('static/images/s-sx-d.png'); ?>">
+                        <img src="<?php echo base_url('static/images/s-sx-d-active.png'); ?>" class="hover">
+                    </li>
+                </ul>
+            </div>
+            <div class="slider_tips">
+                <div class="slider_tip">
+                    <i class="slider_tip_corner"></i>
+                    <span class="slider_tip_title">公积金模式</span>
+                    <span class="slider_tip_cont">凭公积金账号</span>
+                    <span class="slider_tip_cont">3步操作最高可借20万</span>
+                    <span class="slider_tip_btn">立即借款</span>
+                </div>
+                <div class="slider_tip">
+                    <i class="slider_tip_corner corner1"></i>
+                    <span class="slider_tip_title">极速模式</span>
+                    <span class="slider_tip_cont"></span>
+                    <span class="slider_tip_cont">10分钟轻松借10万</span>
+                    <span class="slider_tip_btn">立即借款</span>
+                </div>
+                <div class="slider_tip">
+                    <i class="slider_tip_corner corner2"></i>
+                    <span class="slider_tip_title">精英模式</span>
+                    <span class="slider_tip_cont"></span>
+                    <span class="slider_tip_cont">上班族大额专享</span>
+                    <span class="slider_tip_btn">立即借款</span>
+                </div>
+                <div class="slider_tip">
+                    <i class="slider_tip_corner corner3"></i>
+                    <span class="slider_tip_title">寿险模式</span>
+                    <span class="slider_tip_cont"></span>
+                    <span class="slider_tip_cont">大额借款优选寿险保单</span>
+                    <span class="slider_tip_btn">立即借款</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner banner3">
+
+    </div>
+    <div class="cal-layout">
+        <div class="calculator">
+            <div class="lp-left">
+                <div class="monthSupply">
+                    <span class="supply">每月应还:</span>
+                    <span id="money"></span>
+                    <span class="to">——</span>
+                    <span id="money2"></span>
+                    <span class="supply yuan">元</span>
+                </div>
+                <div class="cost">
+                    <ul>
+                        <span>金额：</span>
+                        <li class="price" data-price="50000">5万</li>
+                        <li class="price" data-price="100000">10万</li>
+                        <li class="price" data-price="300000">30万</li>
+                        <li class="price" data-price="500000">50万</li>
+                        <li class="price" data-price="0">其他</li>
+                    </ul>
+                </div>
+                <div class="putCost">
+                    <input type="text" id="loanAmount" placeholder="请输入您的借款额度">
+                </div>
+                <div class="month">
+                    <ul>
+                        <span>借多久：</span>
+                        <li class="time" data-time="12">12个月</li>
+                        <li class="time" data-time="24">24个月</li>
+                        <li class="time" data-time="36">36个月</li>
+                        <li class="time" data-time="48">48个月</li>
+                        <li class="time" data-time="60">60个月</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div id="calcul">开始计算</div>
+        </div>
+    </div>
+    <div class="banner banner4">
+
+    </div>
+    <div class="company">
+
+    </div>
+    <div class="footer">
+         <div class="contact clearfix">
+             <div class="c_left">
+                    <p><i class="icon iconfont icon-youjian"></i><span>企业邮箱</span>：customer@daibei360.com</p>
+                    <p><i class="icon iconfont icon-dizhi1"></i><span>公司地址</span>：珠江新城国际金融中心32F(IFC西塔)</p>
+             </div>
+             <div class="c_right">
+                    <p><i class="icon iconfont icon-guhua"></i><span>客服电话</span>：020-22043968</p>
+             </div>       
+         </div>
+        <p class="footer_cont innerbox">
+            ICP许可证号 粤ICP备17011450号-1 版权所有 ©贷呗互联网金融
+        </p>
+            
+    </div>
+
+    <div id="suction">
+        <div id="sucBottom">
+            <span id="sucText">贷呗借款平台已累计放款超过:</span>
+            <i>1.8亿</i>
+            <span id="sucSumbit">测测你能借多少</span>
+        </div>
+        <a href="javascript:;" class="close"></a>
+    </div>
+    <div class="popup" style="display: none;">
+        <div class="popupHead">
+            <span>填写短信验证码</span>
+            <img id="close" src="<?php echo base_url('static/images/close.png');?>">
+        </div>
+        <div class="sms">
+            <span class="smsText">验证码</span>
+            <span class="smsPut">
+                <span id="determine">
+                    <input type="text" id="emscode" maxlength="4" placeholder="请输入短信验证码">
+                </span>
+            </span>
+            <span class="smsText" id="resend" style="display: inline-block;">免费获取</span>
+            <span class="smsText" id="sixty" style="display: none;"></span>
+        </div>
+        <div class="prompSms" style="display: none;">验证码已发送到您的手机,请注意查收</div>
+        <div id="smsSumbit">确定</div>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.js"></script>
+<script src="<?php echo base_url('static/js/db.js');?>"></script>
+<script src="<?php echo base_url('static/layer/layer.js');?>"></script>
+<script>
+    $(function () {
+        var codedata = null;
+        var clicktimes = 0;
+        var timer=null;
+        function n(e) {
+            var o = /^1[^012]{1}\d{9}$/;
+            if (o.test(e)) {
+                return !0
+            } else {
+                return !1
+            }
+        };
+
+        function e(e, o) {
+            var t = 'placeholder' in document.createElement('input');
+            if (!t) {
+                e.val(o).css({
+                    'color': '#999'
+                });
+                e.focus(function (e) {
+                    if ($(this).val() == o) {
+                        $(this).val('').css({
+                            'color': '#151414'
+                        })
+                    }
+                });
+                e.blur(function (t) {
+                    if ($(this).val() == '') {
+                        e.val(o).css({
+                            'color': '#999'
+                        })
+                    }
+                })
+            }
+        };
+        $('#phoneSumbit,#resend').on('click', function () {
+            if (clicktimes < 10) {
+                clicktimes += 1;
+                var t = $('#mobile').val().replace(/\s+/g, ''),
+                    o = 60;
+                if (!t) {
+                    $('#promptText').show().text('手机号为空,请重新输入');
+                    return !1
+                };
+                if (!n(t)) {
+                    $('#promptText').show().text('您输入的手机号格式错误,请重新输入');
+                    return !1
+                };
+                $.ajax({
+                    url: '<?php echo site_url("Daibei/sendMessage");?>',
+                    type: 'get', //GET
+                    async: true, //或false,是否异步
+                    cache: true,
+                    data: {
+                        '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>',
+                        phone: t
+                    },
+                    timeout: 5000, //超时时间
+                    dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                    beforeSend: function (xhr) {
+
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        codedata = data;
+                        if(data.code===-1){
+                            $('#promptText').show().text('此号码获取次数过多，请稍后再试');
+                        }else{
+                            $('#promptText').hide().text("");
+                            $('.popup').show();
+                            $('.prompSms').show().text('验证码已发送到您的手机,请注意查收');
+                            $('#emscode').val('');
+                            e($('#emscode'), '请输入短信验证码');
+                            $('#resend').hide();
+                            $('#sixty').show().text(o + '秒重发');
+                            timer = setInterval(function () {
+                                o--;
+                                $('#sixty').show().text(o + '秒重发');
+                                if (o == 57) {
+                                    $('.prompSms').hide().text()
+                                };
+                                if (o == 0) {
+                                    o = 60;
+                                    $('#resend').show().text('免费获取');
+                                    $('#sixty').hide().text('');
+                                    clearInterval(timer)
+                                }
+                            }, 1000);
+                        }
+                    },
+                    error: function (e) { }
+                })
+                setTimeout(function () {
+                    clicktimes = 0;
+                }, 60000);
+            } else {
+                $('#promptText').show().text('请勿频发操作');
+            }
+        });
+        $("#close").click(function () {
+            $('.popup').hide(); 
+            clearInterval(timer);
+        });
+        //短信验证
+        var pass = false;
+
+        $(".popup").on('input', "#emscode", function () {
+            var code = $(this).val();
+            if (code.length == 4) {
+                if (code == codedata.code) {
+                    $('.prompSms').hide();
+                    pass = true;
+                } else {
+                    $('.prompSms').show().text('您输入的验证码有误，请重新输入');
+                    pass = false;
+                }
+            }
+        });
+        $('#smsSumbit').click(function () {
+            if (!pass) {
+                $('.prompSms').show().text('您输入的验证码有误，请重新输入');
+            } else {
+                $.ajax({
+                    url: '<?php echo site_url("Daibei/checkCode");?>',
+                    type: 'get', //GET
+                    async: true, //或false,是否异步
+                    cache: true,
+                    data: {
+                        '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>',
+                        check: 1
+                    },
+                    timeout: 5000, //超时时间
+                    dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                    beforeSend: function (xhr) {
+
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        if (data['status'] == "ok") {
+                            layer.alert('恭喜您申请成功');
+                            $('.popup').hide();
+                        }
+                        if (data['status'] == "repeat") {
+                            layer.alert('您已提交过申请,请耐心等候');
+                            $('.popup').hide();
+
+                        }
+                    },
+                    error: function () {
+
+                    }
+                })
+            }
+        });
+    })
+</script>
+
+</html>

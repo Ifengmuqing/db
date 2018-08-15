@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/apply/css/demo.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/apply/fonts/iconfont.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/apply/css/reset.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/apply/css/process.css'); ?>">
+    <title>办理进度详情</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="p_title">
+            办理进度详情
+        </div>
+        <div class="p_tips">
+            <p>
+                <?php 
+                    $cost=0;
+                    if($res['costType']==0){
+                        $cost=$res['percent']*$res['need']/100;
+                    }else{
+                        $cost=$res['fact'];
+                    }
+                    print("尊敬的{$res['name']}，您本次申请的金融理财产品金额为{$res['need']}元，利率为{$res['rate']},本次服务费用{$cost}元");
+                ?>
+            </p>
+        </div>
+        <div class="p_process">
+            <ul class="p_list">
+                <li class="p_compelete">
+                    <p class="content">
+                        申请已受理
+                    </p>
+                    <p class="time">2017-12-11 09:58:16</p>
+                </li>
+                <li class="p_compelete p_current">
+                    <p class="content">
+                        资料完善中
+                    </p>
+                    <p class="time">2017-12-11 09:58:16</p>
+                </li>
+                <li>
+                    <p class="content">
+                        审核中
+                    </p>
+                    <p class="time">2017-12-11 09:58:16</p>
+                </li>
+                <li>
+                    <p class="content">
+                        已放款
+                    </p>
+                    <p class="time">2017-12-11 09:58:16</p>
+                </li>
+                <li class="p_active">
+                    <p class="content">
+                        已缴费
+                    </p>
+                    <p class="time">2017-12-11 09:58:16</p>
+                </li>
+            </ul>
+        </div>
+        <div class="contact_us">
+            <span>联系信贷员</span>
+            <span>联系我们</span>
+        </div>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+
+</html>

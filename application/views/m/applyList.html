@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/newApplyList.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/fonts/iconfont.css'); ?>">
+    <title>申请列表</title>
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- <meta content="telephone=no,email=no" name="format-detection"> -->
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="head">
+            <span>
+                <i class="iconfont icon-rili"></i>
+            </span>
+            <span>
+                <i class="iconfont icon-geren"></i>
+            </span>
+            <span>
+                <i class="iconfont icon-dizhi"></i>
+            </span>
+            <span>
+                <i class="iconfont icon-dianhua"></i>
+            </span>
+
+        </div>
+        <ul class="apply-list">
+            <?php foreach($data as $key=>$value){?>
+
+            <li class="list-item swipe-action" data-userid=<?php echo $value->id?>>
+                <span>
+                    <?php echo date('Y-m-d', $value->applyTime);?>
+                </span>
+                <span>
+                    <?php echo $value->applyname?>
+                </span>
+                <span>
+                    <?php echo $value->cname?>
+                </span>
+                <span>
+                    <a href="tel://<?php echo $value->applyPhoneNum?>"><?php echo $value->applyPhoneNum?></a>
+                    
+                </span>
+
+                <div class="swipe-content">
+                    <span class="delete-item">
+                        删除
+                    </span>
+                </div>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+
+</body>
+<script src="<?php echo base_url('static/m/js/zepto.min.js');?>"></script>
+<script>
+    $(function () {
+        $('.apply-list').on('swipeLeft', '.list-item', function (e) {
+            $(this).siblings().css("left", "0");
+            $(this).css("left", "-25%");
+            e.preventDefault();
+        });
+        $('.apply-list').on('tap', '.list-item', function (e) {
+            $(this).css("left", "0");
+            e.preventDefault();
+        });
+        $('.apply-list').on('swipeRight', '.list-item', function (e) {
+            $(this).css("left", "0");
+            e.preventDefault();
+        });
+        $('.apply-list').on('tap', '.delete-item', function (e) {
+            var $this = $(this); 
+            var userid=$this.closest('.list-item').get(0).getAttribute("data-userid");
+            $.ajax({
+                url: '<?php echo site_url("Apply/deleteItem");?>',
+                type: 'POST', //GET
+                async: true, //或false,是否异步
+                data: {uid:userid},
+                timeout: 5000, //超时时间
+                dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+                beforeSend: function (xhr) {
+               
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.success === "ok") {
+                        alert("删除成功");
+                        $this.closest('.list-item').hide("100");
+                    }
+                },
+                error: function (xhr, textStatus) {
+                   
+                },
+                complete: function () {
+                    
+                   
+                }
+            });
+            e.preventDefault();
+        });
+
+    });
+</script>
+
+
+</html>

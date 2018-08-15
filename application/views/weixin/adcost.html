@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/fonts/iconfont.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/adcost.css');?>">
+    <title>添加广告费用</title>
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab4" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="adcost_page">
+                    <form action="<?php echo site_url('admin/addADcost')?>" method="POST" id="add_adcost">
+                        <div class="aditem year_item">
+                            <div class="item">
+                                <span>年度</span>
+                                <input type="text" name="year">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>一月</span>
+                                <input type="text" name="Jan">
+                            </div>
+                            <div class="item">
+                                <span>二月</span>
+                                <input type="text" name="Feb">
+                            </div>
+                            <div class="item">
+                                <span>三月</span>
+                                <input type="text" name="Mar">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>四月</span>
+                                <input type="text" name="Apr">
+                            </div>
+                            <div class="item">
+                                <span>五月</span>
+                                <input type="text" name="May">
+                            </div>
+                            <div class="item">
+                                <span>六月</span>
+                                <input type="text" name="Jun">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>七月</span>
+                                <input type="text" name="Jul">
+                            </div>
+                            <div class="item">
+                                <span>八月</span>
+                                <input type="text" name="Aug">
+                            </div>
+                            <div class="item">
+                                <span>九月</span>
+                                <input type="text" name="Sept">
+                            </div>
+                        </div>
+                        <div class="aditem">
+                            <div class="item">
+                                <span>十月</span>
+                                <input type="text" name="Oct">
+                            </div>
+                            <div class="item">
+                                <span>十一月</span>
+                                <input type="text" name="Nov">
+                            </div>
+                            <div class="item">
+                                <span>十二月</span>
+                                <input type="text" name="Dec">
+                            </div>
+                        </div>
+                        <div class="btn_submit">
+                                <button href="javascript:;" class="weui-btn weui-btn_primary adcost">添加</button>
+                        </div>
+                        <input type="hidden" value="<?php echo $sess_id?>" name="sid">
+                        <?php csrf_hidden();?>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php
+         $this->load->view('weixin/tabbar')
+        ?>
+    </div>
+
+</body>
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+        //  提交表单
+         $('#add_adcost').submit(function (event){
+            event.preventDefault();
+            var form = $(this);
+            if (!form.hasClass('fupload')) {
+                //普通表单
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                }).success(function (data, textStatus, jqXHR) {
+                    if (data.state == 'ok') {
+                        $.toast("添加成功");
+                        location.href=document.referrer;
+                    }
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                    $.toast("添加失败");
+                    location.href=document.referrer;
+                });
+            }
+            else {
+                var formData = new FormData(this);
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false
+                }).success(function () {
+                    //成功提交
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    //错误信息
+                });
+            };
+        });
+    });
+</script>
+</html>

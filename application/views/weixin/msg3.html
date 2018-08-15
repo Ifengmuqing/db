@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+    ">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/weixin/css/msg3.css'); ?>">
+
+</head>
+
+<body ontouchstart="">
+
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area">
+            <i class="<?php echo $icon?> weui-icon_msg"></i>
+        </div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">
+                <?php echo $result?>
+            </h2>
+        </div>
+        <div class="success_show">
+            <p>
+                返回公众号主界面继续使用
+            </p>
+       </div>
+     
+        <div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                <p>版权所有 ©贷呗金融 未经许可不得复制,违者必究!</p>
+                <p class="weui-footer__text">Copyright © Daibei Finance Co., Ltd. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/add.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/fonts/iconfont.css'); ?>">
+    <title>新增</title>
+</head>
+
+<body>
+
+    <div class="add_page">
+        <form action="<?php echo site_url('weixin/Manager/HandleAddNew'); ?>" id="add_recond" method="post">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell add_form_item">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">姓名</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入用户姓名" name="name" value="<?php echo $name?>">
+                    </div>
+                </div>
+                <div class="weui-cell  add_form_item">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">手机</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入手机号" name="phone" value="<?php echo $phone?>">
+                    </div>
+                </div>
+                <div class="weui-cell add_form_item">
+                    <div class="weui-cell__hd">
+                        <label for="" class="weui-label">时间</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" value="" placeholder="请选择时间" name="applyTime" id="add_page_time" readonly>
+                    </div>
+                </div>
+                <div class="weui-cell add_form_item" style="display:none">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">身份证</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入用户身份证" name="identity" value="<?php echo $identity?>">
+                    </div>
+                </div>
+                <div class="weui-cell add_form_item">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">贷款产品</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入产品名称" name="productName">
+                    </div>
+                </div>
+
+                <div class="weui-cell add_form_item">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">额度(元)</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入额度" name="need">
+                    </div>
+                </div>
+                <div class="weui-cell add_form_item">
+                    <div class="weui-cell__hd ">
+                        <label class="weui-label">利率(%)</label>
+                    </div>
+                    <div class="weui-cell__bd checktip">
+                        <input class="weui-input" type="text" placeholder="请输入产品利率" name="rate">
+                    </div>
+                </div>
+
+                <div class="weui-cell cost add_form_item">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">费用</label>
+                    </div>
+                    <div class="weui-cell weui-cell_select weui-cell__hd">
+                        <div class="weui-cell__bd">
+                            <select class="weui-select" name="select1" id="costType">
+                                <option selected="" value="1">百分比</option>
+                                <option value="2">实际额</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="weui-cell__cost">
+                        <div class="">
+                            <div class="c_percent checktip c_active">
+                                <input class="weui-input" type="text" placeholder="" name="percent"> %
+                            </div>
+                            <div class="c_fact checktip" style="display:none">
+                                <input class="weui-input" type="text" placeholder="" name="fact"> 元
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cells__title">备注</div>
+                <div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" placeholder="请输入备注" rows="3" name="remark"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <a class="weui-btn weui-btn_primary" href="javascript:void(0)" id="add-submit">保存</a>
+                </div>
+                <?php csrf_hidden();?>
+            </div>
+        </form>
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<!-- 如果使用了某些拓展插件还需要额外的JS -->
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="<?php echo base_url('static/m/js/add.js');?>"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    $(function () {
+        //自定义手机号验证
+        jQuery.validator.addMethod("isphoneNum", function (value, element) {
+            var length = value.length;
+            var mobile = /^1[3|5|8]{1}[0-9]{9}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+        $("#add_recond").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: {
+                    required: true,
+                    maxlength: 11,
+                    maxlength: 11,
+                    isphoneNum: true
+                },
+                time: "required",
+                productName: {
+                    required: true,
+                    minlength: 2
+                },
+                need: {
+                    required: true,
+                    number: true,
+                },
+                rate: {
+                    required: true,
+                    number: true,
+                },
+                percent: {
+                    required: function () {
+                        return $('.c_percent').hasClass('c_active');
+                    },
+                    number: true,
+
+                },
+                fact: {
+                    required: function () {
+                        return $('.c_fact').hasClass('c_active');
+                    },
+                    number: true,
+                }
+
+            },
+            messages: {
+                name: {
+                    required: "*请输入用户名",
+                    minlength: "用户名必需由两个字母组成"
+                },
+                phone: {
+                    required: "*请输入手机号",
+                    maxlength: "*请填写11位的手机号",
+                    minlength: "*请填写11位的手机号",
+                    isphoneNum: "请填写正确的手机号码"
+                },
+                time: {
+                    required: "*请选择时间",
+                },
+                productName: {
+                    required: "*请输入产品名称",
+                    minlength: "产品名称必需由两个字母组成"
+                },
+                need: {
+                    required: "*请输入贷款额度",
+                    number: "请输入正确的数字"
+                },
+                rate: {
+                    required: "*请输入贷款额度",
+                    number: "请输入正确的数字"
+                },
+                percent: {
+                    required: "*请输入费用百分比",
+                    number: "请输入正确的数字"
+                },
+                fact: {
+                    required: "*请输入费用实际额",
+                    number: "请输入正确的数字"
+                },
+            }
+        });
+    })
+</script>
+
+</html>

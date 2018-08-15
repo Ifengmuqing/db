@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+li {
+  list-style: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+a,
+button {
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b {
+  font-weight: bold;
+}
+a,
+a:hover {
+  text-decoration: none;
+}
+body,
+textarea,
+input,
+button {
+  color: #333;
+  background-color: #fff;
+  font-family: "微软雅黑", arial, sans-serif;
+}
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+img {
+  max-width: 100%;
+}
+button,
+fieldset,
+img {
+  border: 0;
+  max-width: 100%;
+}
+img {
+  vertical-align: middle;
+}
+html,
+body {
+  width: 100%;
+  height: auto;
+}
+.hide {
+  display: none;
+}
+.clearfix:after {
+  content: " ";
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+body {
+  -webkit-text-size-adjust: 100% !important;
+}
+.erro_show {
+  width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}

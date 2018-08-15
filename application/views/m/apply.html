@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="<?php echo base_url('static/m/css/index.css'); ?>" />
+    <script>
+        (function (window, document) {
+            var hotcss = {};
+            (function () {
+                var viewportEl = document.querySelector('meta[name="viewport"]'),
+                    hotcssEl = document.querySelector('meta[name="hotcss"]'),
+                    dpr = window.devicePixelRatio || 1,
+                    maxWidth = 540,
+                    designWidth = 0;
+                dpr = dpr >= 3 ? 3 : (dpr >= 2 ? 2 : 1);
+                if (hotcssEl) {
+                    var hotcssCon = hotcssEl.getAttribute("content");
+                    if (hotcssCon) {
+                        var initialDprMatch = hotcssCon.match(/initial\-dpr=([\d\.]+)/);
+                        if (initialDprMatch) {
+                            dpr = parseFloat(initialDprMatch[1])
+                        }
+                        var maxWidthMatch = hotcssCon.match(/max\-width=([\d\.]+)/);
+                        if (maxWidthMatch) {
+                            maxWidth = parseFloat(maxWidthMatch[1])
+                        }
+                        var designWidthMatch = hotcssCon.match(/design\-width=([\d\.]+)/);
+                        if (designWidthMatch) {
+                            designWidth = parseFloat(designWidthMatch[1])
+                        }
+                    }
+                }
+                document.documentElement.setAttribute("data-dpr", dpr);
+                hotcss.dpr = dpr;
+                document.documentElement.setAttribute("max-width", maxWidth);
+                hotcss.maxWidth = maxWidth;
+                if (designWidth) {
+                    document.documentElement.setAttribute("design-width", designWidth)
+                }
+                hotcss.designWidth = designWidth;
+                var scale = 1 / dpr,
+                    content = "width=device-width, initial-scale=" + scale + ", minimum-scale=" + scale +
+                    ", maximum-scale=" + scale + ", user-scalable=no";
+                if (viewportEl) {
+                    viewportEl.setAttribute("content", content)
+                } else {
+                    viewportEl = document.createElement("meta");
+                    viewportEl.setAttribute("name", "viewport");
+                    viewportEl.setAttribute("content", content);
+                    document.head.appendChild(viewportEl)
+                }
+            })();
+            hotcss.px2rem = function (px, designWidth) {
+                if (!designWidth) {
+                    designWidth = parseInt(hotcss.designWidth, 10)
+                }
+                return parseInt(px, 10) * 320 / designWidth / 20
+            };
+            hotcss.rem2px = function (rem, designWidth) {
+                if (!designWidth) {
+                    designWidth = parseInt(hotcss.designWidth, 10)
+                }
+                return rem * 20 * designWidth / 320
+            };
+            hotcss.mresize = function () {
+                var innerWidth = document.documentElement.getBoundingClientRect().width || window.innerWidth;
+                if (hotcss.maxWidth && (innerWidth / hotcss.dpr > hotcss.maxWidth)) {
+                    innerWidth = hotcss.maxWidth * hotcss.dpr
+                }
+                if (!innerWidth) {
+                    return false
+                }
+                document.documentElement.style.fontSize = (innerWidth * 20 / 320) + "px";
+                hotcss.callback && hotcss.callback()
+            };
+            hotcss.mresize();
+            window.addEventListener("resize", function () {
+                clearTimeout(hotcss.tid);
+                hotcss.tid = setTimeout(hotcss.mresize, 33)
+            }, false);
+            window.addEventListener("load", hotcss.mresize, false);
+            setTimeout(function () {
+                hotcss.mresize()
+            }, 333);
+            window.hotcss = hotcss
+        })(window, document);
+    </script>
+      <link rel="stylesheet" href="<?php echo base_url('static/m/css/validate.css'); ?>" />
+      <link rel="stylesheet" href="<?php echo base_url('static/m/css/selectStyle.css'); ?>" />
+    <title>贷款申请</title>
+</head>
+<body>
+    <img class="daibei-banner" src="<?php echo base_url('static/m/images/index01.jpg'); ?>" alt="">
+    <div class="form-wrapper">
+        <form  class="apply-form" id="form2" action="<?php echo site_url('m/Apply/HandleApply');?>" method="post">
+            <div class="item">
+                <div class="item-row clearfix">
+                    <label for="">姓名</label>
+                    <input type="text" placeholder="请输入您的姓名" name="username" data-required="true" data-descriptions="username" data-describedby="username-description">
+                </div>
+                <div id="username-description" class="c-msg"></div>
+            </div>
+            <div class="item">
+                <div class="item-row clearfix">
+                    <label for=""> 手机号</label>
+                    <input type="text" placeholder="请输入您的手机号" name="phonenom" data-validate="phone" data-describedby="phone-description">
+                </div>
+                <div id="phone-description" class="c-msg"></div>
+            </div>
+            <div class="item">
+                <div class="item-row age-item  clearfix">
+                    <label for="">职业</label>
+                    <ul class="age-list">
+                        <li>上班族
+                            <input type="radio" name="age" value="1" data-required="true" data-descriptions="sex" data-describedby="sex-description">
+                        </li>
+                        <li>企业主
+                            <input type="radio" name="age" value="2" data-required="true" data-descriptions="sex" data-describedby="sex-description">
+                        </li>
+                        <li>公务员
+                            <input type="radio" name="age" value="3" data-required="true" data-descriptions="sex" data-describedby="sex-description">
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="sex-description" class="c-msg"></div>
+            </div>
+            <div class="item">
+                <div class="item-row city-item ">
+                    <label for="">所在城市</label>
+                    <div id="city" class="selectCity" >请选择您所在的城市</div>
+                    <input type="text" value="" name="city" id="sendcity" style="display:none" data-required="true" data-descriptions="intro" data-describedby="intro-description">
+                </div>
+                <div id="intro-description" class="c-msg"></div>
+            </div>
+            <?php csrf_hidden();?>
+            <input type="hidden" name="sid" value="<?=$sess_id; ?>">
+            <div class="submit-item">
+                <button class="submit-btn" type="submit">提交申请</button>
+            </div>
+          
+            <div class="btn-radio active" id="insurance">新客福利：赠送30万银行上门额度</div>
+        </form>
+        <div class="show-info">
+            <div class="info-title">
+                <h2>助力银行新时代</h2>
+                <h3>银行贷款比你想象得更简单</h3>
+            </div>
+
+            <ul class="trust-content">
+                <li>
+                    <span></span>
+                    <p>在线申请
+                        <br>快至1天放款</p>
+                </li>
+                <li>
+                    <span></span>
+                    <p>月息低
+                        <br>至0.33%起</p>
+                </li>
+                <li>
+                    <span></span>
+                    <p> 分12/24/16
+                        <br>48/60期还款</p>
+                </li>
+            </ul>
+
+        </div>
+        <p class="attention">在提供后续贷款服务时，您的姓名信息会通过加密方式传输给必要关联方，请勿担心您的隐私泄露。</p>
+        <footer class="footer">
+            <p>版权所有 ©贷呗互联网金融 未经许可不得复制、转载或摘编，违者必究!</p>
+            <p>Copyright © Daibei Finance Co., Ltd. All Rights Reserved</p>
+            <p>ICP许可证号 粤ICP备17011450号-1</p>
+        </footer>
+    </div>
+</body>
+<script src="<?php echo base_url('static/m/js/zepto.min.js'); ?>"></script>
+<script src="<?php echo base_url('static/m/js/zepto-mvalidate.js'); ?>"></script>
+<script src="<?php echo base_url('static/m/js/mobileSelect.min.js'); ?>"></script>
+<script>
+    $(function () {
+        // 表单验证
+        $.mvalidateExtend({
+            phone: {
+                required: true,
+                pattern: /^1[3|4|5|7|8][0-9]{9}$/,
+                each: function () {
+                        
+                },
+                descriptions: {
+                    required: '<div class="field-invalidmsg">请输入手机号码</div>',
+                    pattern: '<div class="field-invalidmsg">您输入的手机号码格式不正确</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                }
+            }
+        });
+
+        $("#form2").mvalidate({
+            type: 2,
+            onKeyup: true,
+            sendForm: true,
+            firstInvalidFocus: true,
+            valid: function (event, options) {
+                //点击提交按钮时,表单通过验证触发函数
+                document.getElementById("form2").submit();
+
+                event.preventDefault();
+            },
+            invalid: function (event, status, options) {
+                //点击提交按钮时,表单未通过验证触发函数
+            },
+            eachField: function (event, status, options) {
+                //点击提交按钮时,表单每个输入域触发这个函数 this 执向当前表单输入域，是jquery对象
+            },
+            eachValidField: function (val) { },
+            eachInvalidField: function (event, status, options) { },
+            conditional: {
+                pwd2: function (val, options) {
+                    $("#confirmpwd2").trigger("keyup." + options.namespace);
+                    return true;
+                },
+                confirmpwd2: function (val) {
+                    var flag;
+                    return (val == $("#pwd2").val()) ? true : false;
+                },
+            },
+            descriptions: {
+                username: {
+                    required: '<div class="field-invalidmsg">请输入用户名</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                },
+                age: {
+                    required: '<div class="field-invalidmsg">请输入年龄</div>',
+                    pattern: '<div class="field-invalidmsg">你输入的格式不正确</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                },
+                password: {
+                    required: '<div class="field-invalidmsg">请输入密码</div>',
+                    conditional: '<div class="field-validmsg">验证通过</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                },
+                confirmpassword: {
+                    required: '<div class="field-invalidmsg">请再次输入密码</div>',
+                    conditional: '<div class="field-invalidmsg">两次密码不一样</div>',
+                    valid: '<div class="field-validmsg">验证通过</div>'
+                },
+                intro: {
+                    required: '<div class="field-invalidmsg">请选择地址</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                },
+                sex: {
+                    required: '<div class="field-invalidmsg">请选择您的年龄段</div>',
+                    valid: '<div class="field-validmsg"></div>'
+                }
+            }
+        });
+
+        $('.age-list').on('click', 'li', function () {
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+
+        });
+        $(".btn-radio").click(function () {
+            $this = $(this);
+            if ($this.hasClass('active')) {
+                $this.removeClass('active');
+            } else {
+                $this.addClass('active');
+            }
+        });
+
+        // 城市选择
+        var mobileSelect1 = new MobileSelect({
+            trigger: '#city',
+            title: '选择城市',
+            wheels: [
+                { data: ['广州', '深圳', '佛山', '珠海'] }
+            ],
+            position: [0], //Initialize positioning
+            callback: function (indexArr, data) {
+                var sendcity = document.getElementById('sendcity');
+                sendcity.setAttribute('value', indexArr);
+            }
+        });
+    })
+</script>
+
+</html>
